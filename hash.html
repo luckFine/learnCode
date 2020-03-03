@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hash</title>
+</head>
+<body>
+    <!-- <div id="nav">
+        <a href="#/page1">page1</a>
+        <a href="#/page2">page2</a>
+        <a href="#/page3">page3</a>
+    </div>
+    <div id="container"></div> -->
+    <div id="history">
+        <a href="/page1">page1</a>
+        <a href="/page2">page2</a>
+        <a href="/page3">page3</a>
+    </div>
+    <div id="container"></div>
+    <script>
+        // 原理
+        // window.location.hash = 1;
+        // let hash = window.location.hash;
+        // window.onhashchange = function(e){
+        //     console.log('老的:'+ e.oldURL)
+        //     console.log('新的:'+ e.newURL)
+        // }
+
+        // 通过onhashchange 可是捕捉url变化，可以通过这个实现SPA路由
+        // 1、创建一个路由对象，register，用于处理每个hash对应的回调函数
+        // 2. 不存在这个hash的时候，默认是首页，实现一个index用户处理首页回调
+        // 3. 通过onhashchange 监听hash变化，定义hash变化的回调函数
+        // function Router(){
+        //     this.routes = {};
+        //     // 监听hashchange
+        //     window.addEventListener('hashchange',this.reload.bind(this))
+        // }
+        // // 首页的回调方法
+        // Router.prototype.index = function(callback){
+        //     this.routes['index'] = callback
+        // }
+        // // 其他页面的回调方法
+        // Router.prototype.register = function(hash,callback){
+        //     this.routes[hash] = callback
+        // }
+        // // 实现reload
+        // Router.prototype.reload = function(){
+        //     let callback;
+        //     let hash = location.hash.slice(1);
+        //     !hash ? callback = this.routes.index : callback = this.routes[hash]
+        //     callback.call(this);
+        // }
+        // // 调用
+        // let router = new Router()
+        // let container = document.getElementById('container')
+        // // 首页
+        // router.index(() => {
+        //     container.innerHTML = '我是首页'
+        // })
+        // // 回调
+        // router.register('/page1',() => {
+        //     console.log('page1')
+        //     container.innerHTML = 'page1'
+        // })
+        // router.register('/page2',() => {
+        //     container.innerHTML = 'page2'
+        // })
+        // router.register('/page3',() => {
+        //     container.innerHTML = 'page3'
+        // })
+        // // 调用
+        // router.reload()
+    </script> 
+    <script>
+    // history的实现
+    // history.go(-1)
+    // history.go(2)
+
+    // h5中新的api
+    // history.pushState();// 可以改变url 且不会刷新页面
+    // history.replaceState(); // 
+    
+    // history改变，不会触发任何事件，暂时无法监听history
+    // 换思路：罗列出所有可能触发history改变的情况，拦截，变相监听
+    // 单页中，url变化:有几种方式可以引起变化
+    // 1. 点击浏览器前进或者后退，
+    // 2. 点击a标签
+    // 3. 触发pushState
+    // 4. 触发replaceState
+
+    // 创建路由对象，location.pathname实现回调
+    // 处理首页
+    // 处理其他页
+    
+    // 通过history也可以实现不刷新实现页面跳转 
+    // class Router {
+    //     constructor(){
+    //         this.routers = {}; 
+    //         this.listenPopState()
+    //         this.listenLick()
+    //     }
+    //     // 监听popState
+    //     listenPopState(){
+    //         window.addEventListener('popState',(e) => {
+    //             let state = e.state || {} ;
+    //             let path = state.path || '' ;
+    //             this.handler(path);
+    //         })
+    //     }
+    //     // A链接的页面跳转
+    //     listenLick(){
+    //         window.addEventListener('click',(e) => {
+    //             let ev = e.target
+    //             if(ev.tagName === 'A' && ev.getAttribute('href')){
+    //                 e.preventDefault()
+    //                 // 更新url
+    //                 this.urlRefresh(ev.getAttribute('href'))
+    //             }
+    //         })
+    //     }
+    //     load(){
+    //         let path = location.pathname;
+    //     }
+    //     register(path,cb){
+    //         this.routers[path] = cb;
+    //     }
+    //     index(cb){
+    //         this.routers['/'] = cb
+    //     }
+    //     // 未找到
+    //     notFound(cb){
+    //         this.routers['notFound'] = cb
+    //     }
+    //     error(cb){
+    //         this.routers['error'] = cb
+    //     }
+    //     urlRefresh(path){
+    //         // 1.是一个合理的js对象
+    //         // 2.title,现在的浏览器都不需要
+    //         // 3. 一个url
+    //         history.pushState({path},null,path)
+    //         this.handler(path)
+    //     }
+    //     // 通用的回调函数
+    //     handler(path){
+    //         let cb ;
+    //         cb = this.routers[path]
+    //         cb.call(this)
+    //         // if(!this.routers.hasOwnP)
+    //     }
+    // }
+    // let router = new Router()
+    // router.load()
+    // let container = document.getElementById('container')
+    // router.register('/page1',() => {
+    //     container.innerHTML = 'page1'
+    // })
+    // router.register('/page2',() => {
+    //     container.innerHTML = 'page2'
+    // })
+    // router.register('/page3',() => {
+    //     container.innerHTML = 'page3'
+    // })
+
+    console.log(window.history)
+    </script>
+</body>
+</html> 

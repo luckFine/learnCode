@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+</head>
+<body>
+    <div id="pay-btn"></div>
+    <script type="text/javascript" src="https://i0.jrjimg.cn/zqt-red-1000/focus/focus2017YMZ/teamFrighting/js/vue.min.js"></script>
+    <script>
+      // 对象语法，提供验证
+      Vue.component('props-demo-advanced', {
+        props: {
+          // 检测类型
+          height: Number,
+          // 检测类型 + 其他验证
+          age: {
+            type: Number,//可以是下列原生构造函数中的一种：String、Number、Boolean、Array、Object、Date、Function、Symbol
+            default: 0,// 为该 prop 指定一个默认值。如果该 prop 没有被传入，则换做用这个值
+            required: true,// 定义该 prop 是否是必填项
+            validator: function (value) {
+              // 自定义验证函数会将该 prop 的值作为唯一的参数代入
+              return value >= 0
+            }
+          }
+        }
+      })
+    </script>
+</body>
+</html>

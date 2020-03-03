@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // var reverse = function (x) {
+    //     const max = 2 ** 31
+    //     const MIN = -max
+    //     const MAX = max - 1
+    //     let result
+    //     let arr = (x + '').split('').reverse()
+    //     if (arr[0] === '0') {
+    //         arr.shift()
+    //     }
+    //     if (x < 0) {
+    //         arr.pop()
+    //         arr.unshift('-')
+    //     }
+    //     result = arr.join('')
+    //     return (result > MAX || result < MIN) ? 0 : result
+    // };
+    // console.log(''+ -123)
+    // console.log(reverse(-123))
+    function Person() { }
+    Person.prototype = {
+        name: 'tt',
+        age: 18
+    }
+    // 实例化之前先修改Person的constructor指向
+    Person.prototype.constructor = Person
+    var person1 = new Person();
+    console.log(person1.name)
+    </script>
+</body>
+</html>

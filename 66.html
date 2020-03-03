@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    figcaption{
+        text-align: center;
+        font-size: 25px;
+        font-family: "微软雅黑";
+        line-height: 150px;
+    }
+    .player{
+        width: 720px;
+        height: 360px;
+        border:1px solid #000;
+        margin: 100px auto;
+        background-color: pink;
+        text-align: center;
+        background: url(images/loading.gif);
+        position: relative;
+    }
+    .player video{
+        height: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+    .controls{
+        width: 700px;
+        height: 40px;
+        background-color: rgba(255,255,0,0.3);
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+    }
+    .controls .switch{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        text-align: center;
+        line-height: 20px;
+        color: yellow;
+    }
+    .controls .progress{
+        width: 435px;
+        height: 10px;
+        background-color: rgba(255,255,255,0.4);
+        position: absolute;
+        left: 40px;
+        bottom:15px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .curr-progress{
+        width: 30%;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+    .time{
+        width: 120px;
+        height: 20px;
+        position: absolute;
+        left: 490px;
+        bottom: 10px;
+        font-size: 12px;
+        line-height: 20px;
+        text-align: center;
+    }
+    .extend{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 20px;
+        bottom: 10px;
+        text-align: center;
+        line-height: 20px;
+        color: yellow;
+    }
+    </style>
+</head>
+<body>
+    <figure>
+        <figcaption>视频案例</figcaption>
+        <div class="player">
+            <video src="http://flv.jrj.com.cn/src_video/20190827/9265d30c6cee629f08e12769467a0a1e/GQ/5d64f118921b4.mp4"></video>
+        <!-- 控制条 -->
+        <div class="controls">
+            <!-- 播放暂停按钮 -->
+            <a href="#" class="switch icon-play"></a>
+            <!-- 进度条 -->
+            <div class="progress">
+                <!-- 当前进度 -->
+                <div class="curr-progress"></div>
+            </div>
+            <!-- 时间 -->
+            <div class="time">
+                <span class="curr-time">00:00:00</span>/
+                <span class="total-time">00:00:00</span>
+            </div>
+            <!-- 全屏 -->
+            <div class="extend icon-resize-full"></div>
+        </div>
+        </div>
+    </figure>
+    <script type="text/javascript">
+            // 思路：
+    // 1.点击按钮，实现播放暂停并且切换图标
+    // 2.算出视频的总时长显示出来
+    // 3.当视频播放的时候，进度条同步，当前时间同步
+    // 4.点击实现全屏
+    
+
+    //获取所需图标
+    var video = document.querySelector('video');
+    //播放按钮
+    var playBtn = document.querySelector('.switch');
+    //当前进度条
+    var currProgress = document.querySelector('.curr-progress');
+    //当前时间
+    var currTime = document.querySelector('.curr-time');
+    //总时间
+    var totalTime = document.querySelector('.total-time');
+    //总屏
+    var extend = document.querySelector('.extend');
+
+    //1.点击按钮，实现播放暂停并且切换图标
+    playBtn.onclick = function(){
+        //判断是否处于播放状态，是,就暂停，更换成暂停的图片
+        if (video.paused) {
+            video.play();
+            this.classList.remove('icon-play');
+            this.classList.add('icon-pause');
+        }else{
+            video.pause();
+            this.classList.remove('icon-pause');
+            this.classList.add('icon-play');
+        }
+    }
+    // 2.算出视频的总时长显示出来
+    video.oncanplay = function(){
+        //计算出视频的总时长
+        var tTime = video.duration;
+        //转换时长
+        var h = Math.floor(tTime/3600);
+        var m = Math.floor(tTime%3600/60);
+        var s = Math.floor(tTime%60);
+        //转换格式
+        h = h>10?h:"0"+h;
+        m = m>10?m:"0"+m;
+        s = s>10?s:"0"+s;
+        //在页面上显示
+        totalTime.innerHTML = h+":"+m+":"+s;
+    }
+    // 3.当视频播放的时候，进度条同步，当前时间同步
+    video.ontimeupdate = function(){
+        //获取当前时间
+        var cTime = video.currentTime;
+        //计算出视频的总时长
+        var tTime = video.duration;
+        //转换时长
+        var h = Math.floor(cTime/3600);
+        var m = Math.floor(cTime%3600/60);
+        var s = Math.floor(cTime%60);
+        //转换格式
+        h = h>10?h:"0"+h;
+        m = m>10?m:"0"+m;
+        s = s>10?s:"0"+s;
+        //在页面上显示
+        currTime.innerHTML = h+":"+m+":"+s;
+        //进度条同步 当前时间/总时间
+        var value = cTime/tTime;
+        currProgress.style.width = value*100+"%";
+        //当播放完毕之后，播放暂停按钮要转换成暂停按钮
+        if (cTime===tTime) {
+            playBtn.classList.remove('icon-play');
+            playBtn.classList.add('icon-pause');
+        }
+        
+    }
+    // 点击按钮全屏
+    extend.onclick = function(){
+        video.webkitRequestFullScreen();
+    }
+    </script>
+</body>
+</html>

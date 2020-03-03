@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>高效前端：web高效编程与优化实践</title>
+    <style>
+        p{
+            margin-top: 100px;;
+        }
+        span[data-title]{
+            position: relative;
+        }
+        span[data-title]:hover::before{
+            content: attr(data-title);
+            position: absolute;
+            top: -150%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- 鼠标hover时显示提示文案 -->
+    <!-- <p>hello,<span data-title="提示文案">luckfine</span></p> -->
+    <script>
+
+    let arr = [1, 2, , 3]
+    // let arrCopy1 = []
+    // let arrCopy2 = []
+    // arr.forEach((item, index, arr) => {
+    //     arrCopy1.push(item * 2)
+    // })
+    // arrCopy2 = arr.map((item, index, arr) => {
+    //     return item * 2
+    // })
+    // let arr = [1, 2, 3]
+    // let it = arr[Symbol.iterator]();
+    // console.log(it.next())
+    // console.log(it.next())
+    // console.log(it.next())
+    // console.log(it.next())
+    // console.log(it.next())
+
+    var myArray = ['a', 'b', 'a', 'b', 'c', 'e', 'e', 'c', 'd', 'd', 'd', 'd'];
+    var myOrderedArray = myArray.reduce(function (accumulator, currentValue) {
+        if (accumulator.indexOf(currentValue) === -1) {
+            accumulator.push(currentValue);
+        }
+        return accumulator
+    }, [])
+
+    console.log(myOrderedArray);
+
+    </script>
+</body>
+</html>

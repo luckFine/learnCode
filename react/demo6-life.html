@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        // 1. 组件的三个生命周期状态:
+            // Mount：插入真实 DOM
+            // Update：被重新渲染
+            // Unmount：被移出真实 DOM
+        // 2. 生命周期流程:
+		// * 第一次初始化显示: ReactDOM.render(<Xxx />, containDom)
+            // constructor()
+            // componentWillMount() : 将要插入回调
+            // render() : 用于插入虚拟DOM回调
+            // componentDidMount() : 已经插入回调
+            // 
+        // * 每次更新state: this.setState({})
+            // componentWillReceiveProps(): 接收父组件新的属性
+            // componentWillUpdate() : 将要更新回调
+            // render() : 更新(重新渲染)
+            // componentDidUpdate() : 已经更新回调
+        // * 删除组件: ReactDOM.unmountComponentAtNode(div): 移除组件
+            // componentWillUnmount() : 组件将要被移除回调
+        // 3. 常用的方法
+        // render(): 必须重写, 返回一个自定义的虚拟DOM
+        // constructor(): 初始化状态, 绑定this(可以箭头函数代替)
+        // componentDidMount() : 只执行一次, 已经在dom树中, 适合启动 / 设置一些监听
+
+
+
+        class Life extends React.Component {
+            constructor (props){
+                // 创建实例时必然会调用的
+                super(props)
+                this.state = {
+                    opacity:1
+                }
+                this.distroyComponent = this.distroyComponent.bind(this)
+            }
+            distroyComponent(){
+                ReactDOM.unmountComponentAtNode(document.getElementById('test2'))
+            }
+            componentDidMount(){
+                // 已经插入回调
+                // 启动循环定时器
+                let { opacity } = this.state
+                this.intervalId = setInterval(() => {
+                    console.log('定时器执行')
+                    opacity -= 0.1
+                    if(opacity <= 0){
+                        opacity = 1
+                    }
+                    this.setState({opacity})
+                }, 200);
+            }
+            componentWillUnmount(){
+                // 组件将被移除
+                clearInterval(this.intervalId)
+            }
+            render() {
+                // 一旦状态修改就重新启动
+                const { opacity } = this.state
+                return (
+                    <div>
+                        <h2 style={{ opacity: opacity }}>{this.props.msg}</h2>
+                        <button onClick={this.distroyComponent}>off</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Life msg='太难了' />, document.getElementById('test2'))
+    </script>
+</body>
+
+</html>

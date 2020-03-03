@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        new Promise((resolve, reject) => {
+            reject(1)
+        }).then(
+            value => console.log(value)
+        ).catch(
+            reason => {
+                console.log('程序报错就中断promise')
+                return new Promise(() => { }) // 返回一个pending的promise
+            })
+        .then(
+            value => console.log('如果程序报错，将不会执行到这')
+        )
+    </script> 
+</body>
+</html>
