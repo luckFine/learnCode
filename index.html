@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function setCookie(name, value, day) {
+            var Days = day || 30;
+            var exp = new Date();
+            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 30);
+            document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString();
+        }
+        function getCookie(name) {
+            var arrstr = document.cookie.split('; ')
+            for (var i = 0; i < arrstr.length; i++) {
+                var temp = arrstr[i].split('=')
+                if (temp[0] === name) return unescape(temp[1])
+            }
+        }
+        setCookie('a', '')
+        setCookie('b', null)
+        console.log('****',getCookie('a'), getCookie('b'))
+
+        if (getCookie('a')) {
+            console.log('ios')
+        }
+
+        if (getCookie('b')) {
+            console.log('安卓')
+        }
+    </script>
+</body>
+
+</html>
