@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <script>
-        function setCookie(name, value, day) {
-            var Days = day || 30;
-            var exp = new Date();
-            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 30);
-            document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString();
+    Array.prototype.map = function (callbackFn, thisArg) {
+        // 处理数组类型异常
+        if (this === null || this === undefined) {
+            throw new TypeError('Cannot read property "map" of null or undefined')
         }
-        function getCookie(name) {
-            var arrstr = document.cookie.split('; ')
-            for (var i = 0; i < arrstr.length; i++) {
-                var temp = arrstr[i].split('=')
-                if (temp[0] === name) return unescape(temp[1])
+        // 处理回调类型异常
+        if (Object.prototype.toString.call(callbackFn) != "[object Function]") {
+            throw new TypeError(callbackFn + ' is not a function')
+        }
+        // 草案中提到要先转换为对象
+        let O = Object(this); // [1,2,3]
+        let T = thisArg;
+        let len = O.length >>> 0;
+        // 创建一个与参数数组个数一样的数组
+        let A = new Array(len);
+        for (let k = 0; k < len; k++) {
+            // 还记得原型链那一节提到的 in 吗？in 表示在原型链查找
+            // 如果用 hasOwnProperty 是有问题的，它只能找私有属性
+            if (k in O) {
+                let kValue = O[k];
+                // 依次传入this, 当前项，当前索引，整个数组
+                let mappedValue = callbackFn.call(T, kValue, k, O);
+                A[k] = mappedValue;
             }
         }
-        setCookie('a', '')
-        setCookie('b', null)
-        console.log('****',getCookie('a'), getCookie('b'))
+        return A;
+    }
 
-        if (getCookie('a')) {
-            console.log('ios')
-        }
-
-        if (getCookie('b')) {
-            console.log('安卓')
-        }
     </script>
 </body>
-
 </html>
