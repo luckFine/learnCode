@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item-header{
+            font-size: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./vnode.js"></script>
+    <script>
+        let vode = createElement('div',{id:'test'},[
+            createElement('p', {key:'a',style:{color:'blue'}},'节点一'),
+            createElement('p', {key:'b','@click':()=>{ alert('xx')}}, '节点一'),
+            createElement('p', {key:'c','class':'item-header'}, '节点一'),
+            createElement('p', {key:'d'}, '节点一')
+        ])
+        let vode1 = createElement('div', { id: 'test' }, [
+            createElement('p', { key: 'd', style: { color: 'red' } }, '节点4'),
+            createElement('p', { key: 'a'}, '节点一'),
+            createElement('p', { key: 'b', 'class': 'item-header' }, '节点一'),
+            createElement('p', { key: 'e' }, '节点5'),
+            createElement('p', { key: 'f',style:{color:'#eee'} }, '节点5')
+        ])
+        render(vode, document.getElementById("app"))
+        setTimeout(() => {
+            render(vode1,document.getElementById("app"))
+        })
+    </script>
+</body>
+</html>

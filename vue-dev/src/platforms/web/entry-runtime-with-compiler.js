@@ -13,7 +13,7 @@ const idToTemplate = cached(id => {
   const el = query(id)
   return el && el.innerHTML
 })
-// 给Vue添加$mount
+// 给Vue扩展$mount
 // 接受一个字符串或者元素。如果是字符串 调用document.querySelector 如果是dom对象，直接return
 const mount = Vue.prototype.$mount
 Vue.prototype.$mount = function (
@@ -29,14 +29,14 @@ Vue.prototype.$mount = function (
     )
     return this
   }
-
+  // 获得传入的选项
   const options = this.$options
   // 判断是否定义了render
   // 如果没有执行就需要编译生成render函数
   if (!options.render) {
     // 判断是否有template 
     let template = options.template
-    // 如果定义了template
+    // 如果定义了template 解析template
     if (template) {
       // template为字符串
       if (typeof template === 'string') {
@@ -59,14 +59,11 @@ Vue.prototype.$mount = function (
         return this
       }
     } else if (el) {
+      // 没有定义template，解析el
       template = getOuterHTML(el)
     }
     // template为绑定元素及其子元素
     if (template) {
-      /* istanbul ignore if */
-      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-        mark('compile')
-      }
       // 得到render函数
       const { render, staticRenderFns } = compileToFunctions(template, {
         outputSourceRange: process.env.NODE_ENV !== 'production',
@@ -78,12 +75,6 @@ Vue.prototype.$mount = function (
       // 将render函数赋值给options.render
       options.render = render
       options.staticRenderFns = staticRenderFns
-
-      /* istanbul ignore if */
-      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-        mark('compile end')
-        measure(`vue ${this._name} compile`, 'compile', 'compile end')
-      }
     }
   }
   // 如果定义了render函数，那么直接执行$mount

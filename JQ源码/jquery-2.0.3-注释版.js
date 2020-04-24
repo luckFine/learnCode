@@ -204,11 +204,12 @@ jQuery.fn = jQuery.prototype = {
 	length: 0,
 
 	toArray: function() {
+		// 利用数组的slice 将类数组转成数组
 		return core_slice.call( this );
 	},
 
 	// Get the Nth element in the matched element set OR
-	// Get the whole matched element set as a clean array
+	// Get the whole matched element set as a clean array  换num的时候，返回的是类数组中的某个元素，没有传的时候 返回整个数组
 	get: function( num ) {
 		return num == null ?
 
@@ -423,7 +424,7 @@ jQuery.extend({
 	isNumeric: function( obj ) {
 		return !isNaN( parseFloat(obj) ) && isFinite( obj );
 	},
-
+	// 判断对象类型
 	type: function( obj ) {
 		if ( obj == null ) {
 			return String( obj );
@@ -433,7 +434,7 @@ jQuery.extend({
 			class2type[ core_toString.call(obj) ] || "object" :
 			typeof obj;
 	},
-
+	// 判断是否是对象字面量
 	isPlainObject: function( obj ) {
 		// Not plain objects:
 		// - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -449,6 +450,7 @@ jQuery.extend({
 		// https://bugzilla.mozilla.org/show_bug.cgi?id=814622
 		try {
 			if ( obj.constructor &&
+				// 只有对象字面量有这个属性
 					!core_hasOwn.call( obj.constructor.prototype, "isPrototypeOf" ) ) {
 				return false;
 			}
@@ -460,7 +462,7 @@ jQuery.extend({
 		// |obj| is a plain object, created by {} or constructed with new Object
 		return true;
 	},
-
+	// 是都是空对象 没有自身属性和方法的话就是空对象 比如空函数 for in  系统自带的循环不到
 	isEmptyObject: function( obj ) {
 		var name;
 		for ( name in obj ) {
@@ -551,7 +553,7 @@ jQuery.extend({
 		}
 	},
 
-	// Convert dashed to camelCase; used by the css and data modules
+	// Convert dashed to camelCase; used by the css and data modules 转成驼峰
 	// Microsoft forgot to hump their vendor prefix (#9572)
 	camelCase: function( string ) {
 		return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
@@ -561,7 +563,7 @@ jQuery.extend({
 		return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 	},
 
-	// args is for internal usage only
+	// args is for internal usage only  args是内部使用的
 	each: function( obj, callback, args ) {
 		var value,
 			i = 0,
@@ -615,11 +617,12 @@ jQuery.extend({
 		return text == null ? "" : core_trim.call( text );
 	},
 
-	// results is for internal usage only
+	// results is for internal usage only 转成数组  results为内部使用
 	makeArray: function( arr, results ) {
 		var ret = results || [];
 
 		if ( arr != null ) {
+			// 判断对象是否是类数组
 			if ( isArraylike( Object(arr) ) ) {
 				jQuery.merge( ret,
 					typeof arr === "string" ?
@@ -637,7 +640,7 @@ jQuery.extend({
 		return arr == null ? -1 : core_indexOf.call( arr, elem, i );
 	},
 
-	merge: function( first, second ) {
+	merge: function( first, second ) {  // 合并数组
 		var l = second.length,
 			i = first.length,
 			j = 0;
