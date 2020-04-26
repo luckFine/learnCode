@@ -44,17 +44,18 @@ export function initGlobalAPI (Vue: GlobalAPI) {
     mergeOptions,
     defineReactive
   }
-  // 给vue定义了一些其他的方法
+  // 给vue定义set  delete  nextTick
   Vue.set = set
   Vue.delete = del
   Vue.nextTick = nextTick
 
   // 2.6 explicit observable API
+  // 添加把 对象变为 observable 的方法
   Vue.observable = (obj: T): T => {
     observe(obj)
     return obj
   }
-
+  // 在Vue.options 添加 'component','directive','filter' + ’s’ 的形式，并且设置为一个空对象
   Vue.options = Object.create(null)
   ASSET_TYPES.forEach(type => {
     Vue.options[type + 's'] = Object.create(null)
@@ -62,6 +63,7 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 
   // this is used to identify the "base" constructor to extend all plain-object
   // components with in Weex's multi-instance scenarios.
+  // 在weex中用的 暂不讨论
   Vue.options._base = Vue
 
   // 在vue上扩展了一个builtInComponents   builtInComponents 实际上keep-alive， 也就是说keep-alive实际上是内置组件

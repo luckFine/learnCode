@@ -29,10 +29,13 @@ Vue.config.getTagNamespace = getTagNamespace
 Vue.config.isUnknownElement = isUnknownElement
 
 // install platform runtime directives & components
+// 在vue里扩展directives和components 
+// platformDirectives 主要包含了 model 和 show
+// platformComponents 主要包含了 Transition 和 TransitionGroup
 extend(Vue.options.directives, platformDirectives)
 extend(Vue.options.components, platformComponents)
 
-// install platform patch function
+// 把__patch__函数添加到vue实例上  __patch__是打补丁的
 Vue.prototype.__patch__ = inBrowser ? patch : noop
 // 实现.$mount
 Vue.prototype.$mount = function (
