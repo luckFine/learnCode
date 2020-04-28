@@ -17,10 +17,10 @@ function Vue (options) {
 }
 // 定义一些mixin方法，将不同的方法添加到不同的文件下 添加到vue的原型上
 initMixin(Vue)
-stateMixin(Vue)
-eventsMixin(Vue)
-lifecycleMixin(Vue)
-renderMixin(Vue)
+stateMixin(Vue) // 状态混入  圆形方法 ***
+eventsMixin(Vue) //  事件相关  原型方法 ***
+lifecycleMixin(Vue) // 生命周期  ***
+renderMixin(Vue) // 
 
 
 // 初始化总结 

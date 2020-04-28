@@ -51,11 +51,11 @@ export function initMixin (Vue: Class<Component>) {
     // 初始化函数
     vm._self = vm
     initLifecycle(vm)
-    initEvents(vm)
-    initRender(vm)
+    initEvents(vm) // 处理父子组件事件
+    initRender(vm) // 处理插槽  createElement的函数声明  '$attrs'和$listeners的响应
     callHook(vm, 'beforeCreate')
-    initInjections(vm) // resolve injections before data/props
-    initState(vm)  // data等配置项的初始化
+    initInjections(vm) // resolve injections before data/props  祖辈传值的响应式
+    initState(vm)  // data等配置项的初始化  初始化所有methods  数据响应化 执行各种数据初始化的地方
     initProvide(vm) // resolve provide after data/props
     callHook(vm, 'created')
 
