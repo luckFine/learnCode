@@ -19,20 +19,12 @@ export function initMixin (Vue: Class<Component>) {
     vm._uid = uid++
 
     let startTag, endTag
-    /* istanbul ignore if */
-    if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-      startTag = `vue-perf-start:${vm._uid}`
-      endTag = `vue-perf-end:${vm._uid}`
-      mark(startTag)
-    }
 
     // a flag to avoid this being observed
     vm._isVue = true
     // merge options
     if (options && options._isComponent) {
-      // optimize internal component instantiation
-      // since dynamic options merging is pretty slow, and none of the
-      // internal component options needs special treatment.
+      // 优化内部组件实例化，因为动态选项合并速度很慢，而且没有一个内部组件选项需要特殊处理。
       initInternalComponent(vm, options)
     } else {
       // 将传入的options 合并到 vm.$options
@@ -44,27 +36,22 @@ export function initMixin (Vue: Class<Component>) {
     }
     /* istanbul ignore else */
     if (process.env.NODE_ENV !== 'production') {
+      // 开发环境 代理 vm 用来提供一些报错和警告信息
       initProxy(vm)
     } else {
       vm._renderProxy = vm
     }
     // 初始化函数
     vm._self = vm
-    initLifecycle(vm)
-    initEvents(vm)
-    initRender(vm)
-    callHook(vm, 'beforeCreate')
+    initLifecycle(vm) // 挂载生命周期
+    initEvents(vm) // 挂载自定义事件
+    initRender(vm) // 挂载render
+    callHook(vm, 'beforeCreate') // 调用生命周期钩子 beforeCreate
     initInjections(vm) // resolve injections before data/props
     initState(vm)  // data等配置项的初始化
     initProvide(vm) // resolve provide after data/props
-    callHook(vm, 'created')
+    callHook(vm, 'created') // 初始化结束，调用 created 钩子，这个时候还没有替换 dom
 
-    /* istanbul ignore if */
-    if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-      vm._name = formatComponentName(vm, false)
-      mark(endTag)
-      measure(`vue ${vm._name} init`, startTag, endTag)
-    }
     // 判断是否传入el
     if (vm.$options.el) {
       // 挂载

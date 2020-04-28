@@ -33,11 +33,13 @@ export function createElement (
   normalizationType: any,
   alwaysNormalize: boolean
 ): VNode | Array<VNode> {
+  // 对参数进行顺序调整
   if (Array.isArray(data) || isPrimitive(data)) {
     normalizationType = children
     children = data
     data = undefined
   }
+  // 很明显在调用 $createElement 时候这里就是 true
   if (isTrue(alwaysNormalize)) {
     normalizationType = ALWAYS_NORMALIZE
   }
@@ -51,6 +53,9 @@ export function _createElement (
   children?: any,
   normalizationType?: number
 ): VNode | Array<VNode> {
+  // 如果data是一个响应式 那么返回空节点
+  // 也就是创建的 vnode 里面的 data 参数 不能是通过 vue
+  // 添加过 getter 和 setter 的
   if (isDef(data) && isDef((data: any).__ob__)) {
     process.env.NODE_ENV !== 'production' && warn(
       `Avoid using observed data object as vnode data: ${JSON.stringify(data)}\n` +
@@ -80,6 +85,7 @@ export function _createElement (
     }
   }
   // support single function children as default scoped slot
+  // slot 插槽的情况处理
   if (Array.isArray(children) &&
     typeof children[0] === 'function'
   ) {

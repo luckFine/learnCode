@@ -67,6 +67,7 @@ export function initState(vm: Component) {
   if (opts.data) {
     initData(vm)
   } else {
+    // 没有定义就赋值一个空对象
     observe(vm._data = {}, true /* asRootData */)
   }
   // 定义了computed，就执行initComputed()
@@ -152,6 +153,8 @@ function initData (vm: Component) {
     const key = keys[i]
     if (process.env.NODE_ENV !== 'production') {
       // 定义重复 警告
+      // hasOwn 即为  hasOwnProperty.call(obj, key)
+      // 先定义method是否重复
       if (methods && hasOwn(methods, key)) {
         warn(
           `Method "${key}" has already been defined as a data property.`,
@@ -159,6 +162,7 @@ function initData (vm: Component) {
         )
       }
     }
+    // 在对比props是否重复
     if (props && hasOwn(props, key)) {
       // 定义重复 警告
       process.env.NODE_ENV !== 'production' && warn(
@@ -167,11 +171,11 @@ function initData (vm: Component) {
         vm
       )
     } else if (!isReserved(key)) {
-      // 执行proxy  进行代理
+      // 执行proxy  对data进行代理
       proxy(vm, `_data`, key)
     }
   }
-  // observe data
+  // 对所有的字段添加 getter 和 setter 的响应式操作
   observe(data, true /* asRootData */)
 }
 

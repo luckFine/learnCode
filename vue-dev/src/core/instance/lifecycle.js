@@ -189,14 +189,13 @@ export function mountComponent (
     }
   } else {
     updateComponent = () => {
+      // 这里的操作就是真正的 把 插值替换为 数据的操作了
       // 最终调用_update()
       vm._update(vm._render(), hydrating)
     }
   }
 
-  // we set this to vm._watcher inside the watcher's constructor
-  // since the watcher's initial patch may call $forceUpdate (e.g. inside child
-  // component's mounted hook), which relies on vm._watcher being already defined
+  // 在 watcher 的构造函数中，将其设置为vm._watcher，因为观察者初始补丁可能调用$forceUpdate（例如在子组件的mounted中）依赖于watch已经定义
   new Watcher(vm, updateComponent, noop, {
     before () {
       if (vm._isMounted && !vm._isDestroyed) {
