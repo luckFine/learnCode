@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>echartsjs</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, viewport-fit=cover">
+</head>
+<body>
+    <div id="app" style="width: 100%;height:130px;">
+
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.js"></script>
+    <script src="https://lib.baomitu.com/echarts/4.7.0/echarts-en.min.js"></script>
+    <script>
+    var myChart = echarts.init(document.getElementById('app'));
+        myChart.showLoading();
+    $.ajax({
+        type: "get",  // 请求方式
+        url: "http://127.0.0.1:5500/disk.tree.json",
+        success:function(data){
+            myChart.hideLoading();
+            var diskData = data.data.item
+            let treeData = []
+            diskData.forEach(element => {
+                let obj = {
+                    value: element.advanceDeclineRatio,
+                    platCode: element.platCode,
+                    name:element.platName,
+                    platSnapShot:element.platSnapShot
+                }
+                treeData.push(obj)
+            });
+            console.log(treeData)
+            myChart.setOption(option = {
+                series: [
+                    {
+                        type: 'treemap',
+                        width:'100%',
+                        height:'100%',
+                        // label: {
+                        //     show: true,
+                        //     formatter: '{b}'
+                        // },
+                        visibleMin: 100,
+                        levels: levelOption,
+                        breadcrumb: {
+                            show: false
+                        },
+                        itemStyle: {
+                            normal:{
+                                borderColor: '#fff'
+                            }
+                        },
+                        data: treeData
+                    }
+                ]
+            });   
+        },
+        error:function(err){
+            console.log(err)
+        }
+    })    
+    </script>   
+
+        
+</body>
+</html>

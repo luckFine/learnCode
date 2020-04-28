@@ -1,0 +1,232 @@
+{
+"retcode": 0,
+"msg": "",
+"data": {
+"item": [
+{
+"platCode": "400128867",
+"platName": "银行",
+"cmv": 6175568288311,
+"advanceDeclineRatio": 1.91,
+"netInflow": 2228986271.2000003,
+"platSnapShot": { }
+},
+{
+"platCode": "400128857",
+"platName": "医药生物",
+"cmv": 4076146681538,
+"advanceDeclineRatio": -0.39,
+"netInflow": -573298726.3999996,
+"platSnapShot": { }
+},
+{
+"platCode": "400128855",
+"platName": "食品饮料",
+"cmv": 3820698379780,
+"advanceDeclineRatio": -0.44,
+"netInflow": -825907855.6899998,
+"platSnapShot": { }
+},
+{
+"platCode": "400128868",
+"platName": "非银金融",
+"cmv": 3775609846703,
+"advanceDeclineRatio": -0.22,
+"netInflow": -641739699.8699998,
+"platSnapShot": { }
+},
+{
+"platCode": "400128860",
+"platName": "电子",
+"cmv": 3039254076598,
+"advanceDeclineRatio": -1.03,
+"netInflow": -1863486406.100001,
+"platSnapShot": { }
+},
+{
+"platCode": "400128843",
+"platName": "化工",
+"cmv": 2417856654214,
+"advanceDeclineRatio": -0.92,
+"netInflow": -2359468238.150001,
+"platSnapShot": { }
+},
+{
+"platCode": "400128861",
+"platName": "计算机",
+"cmv": 2054966307032,
+"advanceDeclineRatio": -1.3,
+"netInflow": -3658142634.559996,
+"platSnapShot": { }
+},
+{
+"platCode": "400128866",
+"platName": "房地产",
+"cmv": 1831406207640,
+"advanceDeclineRatio": 0.47,
+"netInflow": 450395820.18,
+"platSnapShot": { }
+},
+{
+"platCode": "400128864",
+"platName": "公用事业",
+"cmv": 1701513320824,
+"advanceDeclineRatio": -0.19,
+"netInflow": -242974416.78999996,
+"platSnapShot": { }
+},
+{
+"platCode": "400128849",
+"platName": "机械设备",
+"cmv": 1667008906562,
+"advanceDeclineRatio": -0.73,
+"netInflow": -2330717010.1399994,
+"platSnapShot": { }
+},
+{
+"platCode": "400128865",
+"platName": "交通运输",
+"cmv": 1637186815233,
+"advanceDeclineRatio": -0.54,
+"netInflow": -656560252.5999999,
+"platSnapShot": { }
+},
+{
+"platCode": "400128842",
+"platName": "采掘",
+"cmv": 1542104003213,
+"advanceDeclineRatio": -0.86,
+"netInflow": -880448734.47,
+"platSnapShot": { }
+},
+{
+"platCode": "400128848",
+"platName": "电气设备",
+"cmv": 1483374034676,
+"advanceDeclineRatio": -0.05,
+"netInflow": 439164089.77,
+"platSnapShot": { }
+},
+{
+"platCode": "400128851",
+"platName": "汽车",
+"cmv": 1300370439929,
+"advanceDeclineRatio": -1.39,
+"netInflow": -1884742488.0999994,
+"platSnapShot": { }
+},
+{
+"platCode": "400128862",
+"platName": "传媒",
+"cmv": 1284781857150,
+"advanceDeclineRatio": -1.13,
+"netInflow": -2062100813.17,
+"platSnapShot": { }
+},
+{
+"platCode": "400128847",
+"platName": "建筑装饰",
+"cmv": 1167946093412,
+"advanceDeclineRatio": -1.09,
+"netInflow": -984045028.63,
+"platSnapShot": { }
+},
+{
+"platCode": "400128852",
+"platName": "家用电器",
+"cmv": 1149745319477,
+"advanceDeclineRatio": -0.44,
+"netInflow": -153493476.65999997,
+"platSnapShot": { }
+},
+{
+"platCode": "400128845",
+"platName": "有色金属",
+"cmv": 1147610132730,
+"advanceDeclineRatio": -0.93,
+"netInflow": -1690062698.7899995,
+"platSnapShot": { }
+},
+{
+"platCode": "400128854",
+"platName": "农林牧渔",
+"cmv": 1087665831760,
+"advanceDeclineRatio": -0.19,
+"netInflow": -633624658.49,
+"platSnapShot": { }
+},
+{
+"platCode": "400128863",
+"platName": "通信",
+"cmv": 888680275510,
+"advanceDeclineRatio": 0.1,
+"netInflow": 370497290.1299999,
+"platSnapShot": { }
+},
+{
+"platCode": "400128850",
+"platName": "国防军工",
+"cmv": 756090780379,
+"advanceDeclineRatio": -2.69,
+"netInflow": -2078520503.5400002,
+"platSnapShot": { }
+},
+{
+"platCode": "400128846",
+"platName": "建筑材料",
+"cmv": 718223906175,
+"advanceDeclineRatio": 0.09,
+"netInflow": 272181788.4699999,
+"platSnapShot": { }
+},
+{
+"platCode": "400128858",
+"platName": "商业贸易",
+"cmv": 630829514504,
+"advanceDeclineRatio": 0.41,
+"netInflow": 601189323.7900001,
+"platSnapShot": { }
+},
+{
+"platCode": "400128853",
+"platName": "轻工制造",
+"cmv": 619411435321,
+"advanceDeclineRatio": -0.89,
+"netInflow": -462338774.5800001,
+"platSnapShot": { }
+},
+{
+"platCode": "400128844",
+"platName": "钢铁",
+"cmv": 500478235764,
+"advanceDeclineRatio": -0.1,
+"netInflow": -299797935.41,
+"platSnapShot": { }
+},
+{
+"platCode": "400128856",
+"platName": "纺织服装",
+"cmv": 322745294028,
+"advanceDeclineRatio": -1.31,
+"netInflow": -302811105.75,
+"platSnapShot": { }
+},
+{
+"platCode": "400128859",
+"platName": "休闲服务",
+"cmv": 320398856660,
+"advanceDeclineRatio": -0.92,
+"netInflow": -139348427.89000008,
+"platSnapShot": { }
+},
+{
+"platCode": "400128869",
+"platName": "综合",
+"cmv": 161961116318,
+"advanceDeclineRatio": -0.94,
+"netInflow": -326107391.82,
+"platSnapShot": { }
+}
+]
+}
+}

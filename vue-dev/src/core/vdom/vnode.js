@@ -1,7 +1,7 @@
 /* @flow */
 
 export default class VNode {
-  tag: string | void;
+  tag: string | void; 
   data: VNodeData | void;
   children: ?Array<VNode>;
   text: string | void;
@@ -31,33 +31,50 @@ export default class VNode {
 
   constructor (
     tag?: string,
-    data?: VNodeData,
-    children?: ?Array<VNode>,
-    text?: string,
-    elm?: Node,
-    context?: Component,
+    data?: VNodeData,  
+    children?: ?Array<VNode>, 
+    text?: string, 
+    elm?: Node, 
+    context?: Component, 
     componentOptions?: VNodeComponentOptions,
     asyncFactory?: Function
   ) {
+     // 标签名
     this.tag = tag
+    // 属性值 
     this.data = data
+    // 子节点
     this.children = children
+    // 文本节点
     this.text = text
+    // 该vnode实例对应的真实dom节点
     this.elm = elm
+    // 节点的 namespace
     this.ns = undefined
+    // vnode 对应的 上下文环境，多数为 vm
     this.context = context
+    // 组件函数中会用到的
     this.fnContext = undefined
     this.fnOptions = undefined
     this.fnScopeId = undefined
+    // v-for 绑定的key
     this.key = data && data.key
+    // 组件vnode 的 options
     this.componentOptions = componentOptions
+    // 组件实例
     this.componentInstance = undefined
     this.parent = undefined
+    // 是否为平台标签或文本
     this.raw = false
+    // 静态节点
     this.isStatic = false
+    // 是否是根节点
     this.isRootInsert = true
+    // 是否是注释节点
     this.isComment = false
+    // 是否是克隆节点
     this.isCloned = false
+    // 是否是v-once节点
     this.isOnce = false
     this.asyncFactory = asyncFactory
     this.asyncMeta = undefined
@@ -70,22 +87,20 @@ export default class VNode {
     return this.componentInstance
   }
 }
-
+// 生成空的注释节点
 export const createEmptyVNode = (text: string = '') => {
   const node = new VNode()
   node.text = text
   node.isComment = true
   return node
 }
-
+// 生成文本节点
 export function createTextVNode (val: string | number) {
   return new VNode(undefined, undefined, undefined, String(val))
 }
 
-// optimized shallow clone
-// used for static nodes and slot nodes because they may be reused across
-// multiple renders, cloning them avoids errors when DOM manipulations rely
-// on their elm reference.
+// 用于静态节点和时隙节点，因为它们可以在多个渲染中重用，克隆它们可以避免当DOM操作依赖于它们的elm引用时出现错误
+// 克隆节点
 export function cloneVNode (vnode: VNode): VNode {
   const cloned = new VNode(
     vnode.tag,
@@ -108,6 +123,6 @@ export function cloneVNode (vnode: VNode): VNode {
   cloned.fnOptions = vnode.fnOptions
   cloned.fnScopeId = vnode.fnScopeId
   cloned.asyncMeta = vnode.asyncMeta
-  cloned.isCloned = true
+  cloned.isCloned = true // 克隆节点的标记
   return cloned
 }
