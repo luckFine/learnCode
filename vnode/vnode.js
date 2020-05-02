@@ -46,6 +46,7 @@ function createElement(tag, data, children) {
         flag, // vnode的类型
         tag,
         data,
+        key:data && data.key,
         children,
         childrenFlag,
         el:null
@@ -155,16 +156,17 @@ function patchChildren(prevChildrenFlag, nextChildrenFlag, prevChildren, nextChi
                     // 众多虚拟dom，就在这里进行区分。每家优化策略不一样
                     // 老的是个数组  新的也是个数组
                     let lastIndex = 0;
-                    let find = false
                     for (let i = 0; i < nextChildren.length; i++){
-                        let nextVode = nextChildren[i]
+                        let nextVnode = nextChildren[i]
+                        let find = false
                         let j = 0
                         for (j; j < prevChildren.length; j++){
-                            let preVnode = nextChildren[i]
+                            let preVnode = prevChildren[j]
 
-                            if (preVnode.key === nextVode.key) {
+                            if (preVnode.key == nextVnode.key) {
+                                find = true
                                 // key相同 认为是同一个元素
-                                patch(preVnode, nextVode, container)
+                                patch(preVnode, nextVnode, container)
                                 if (j < lastIndex){
                                     // 需要移动
                                     // insertBefore 移动元素
@@ -181,12 +183,12 @@ function patchChildren(prevChildrenFlag, nextChildrenFlag, prevChildren, nextChi
                         if (!find) {
                             // 需要新增的
                             let  flagNode =  i == 0 ?prevChildren[0].el : nextChildren[i-1].el.nextSibling
-                            mount(nextVode,container)
+                            mount(nextVnode,container,flagNode)
                         }
 
                     }
                     // 移除不需要的元素
-                    for (let i = 0; i = prevChildren.length; i++){
+                    for (let i = 0; i < prevChildren.length; i++){
                         const prevVnode = prevChildren[i]
                         const has = nextChildren.find(next => next.key == prevVnode.key)
                         if (!has) {
@@ -199,7 +201,7 @@ function patchChildren(prevChildrenFlag, nextChildrenFlag, prevChildren, nextChi
     }
 }
 
-function patchText() {
+function patchText(prev,next) {
     let el = (next.el = prev.el)
     if (next.children !== prev.children) {
         el.nodeValue = next.children
@@ -260,7 +262,7 @@ function patchData(el, key, prev, next) {
                 el.style[k] = next[k]
             }
             for (let k in prev) {
-                if (!next.hasOwnProperty(k)) {
+                if (next && !next.hasOwnProperty(k)) {
                     el.style[k] = ''               
                 }
             }
@@ -272,7 +274,7 @@ function patchData(el, key, prev, next) {
         default:
             if (key[0] === '@') {
                 if (prev) {
-                    el.removeListener(key.slice(1), prev)
+                    el.removeEventListener(key.slice(1), prev)
                 }
                 if (next) {
                     el.addEventListener(key.slice(1),next)
