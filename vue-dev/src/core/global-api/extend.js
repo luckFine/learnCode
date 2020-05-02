@@ -17,7 +17,7 @@ export function initExtend (Vue: GlobalAPI) {
   Vue.extend = function (extendOptions: Object): Function {
     extendOptions = extendOptions || {}
     const Super = this  // 大Vue
-    const SuperId = Super.cid  // vue的cid
+    const SuperId = Super.cid  // vue的cid 构造器表示
     // 做一次缓存，也就是单例模式
     const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
     if (cachedCtors[SuperId]) {
@@ -86,6 +86,7 @@ function initProps (Comp) {
     proxy(Comp.prototype, `_props`, key)
   }
 }
+// 原型继承的方式返回一个构造器
 
 function initComputed (Comp) {
   const computed = Comp.options.computed
