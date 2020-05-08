@@ -147,55 +147,20 @@ export function mountComponent (
   if (!vm.$options.render) {
     // 没有定义render  就创建一个空的VNode
     vm.$options.render = createEmptyVNode
-    if (process.env.NODE_ENV !== 'production') {
-      /* istanbul ignore if */
-      if ((vm.$options.template && vm.$options.template.charAt(0) !== '#') ||
-        vm.$options.el || el) {
-        warn(
-          'You are using the runtime-only build of Vue where the template ' +
-          'compiler is not available. Either pre-compile the templates into ' +
-          'render functions, or use the compiler-included build.',
-          vm
-        )
-      } else {
-        warn(
-          'Failed to mount component: template or render function not defined.',
-          vm
-        )
-      }
-    }
+    // 如果用runtime-only 版本 就必须有render函数
+    // 写了template，就必须用编译版本
   }
   callHook(vm, 'beforeMount')
 
   let updateComponent
-/* istanbul ignore if */
-  // config.performance && mark是一些性能和买点
-  if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-    updateComponent = () => {
-      const name = vm._name
-      const id = vm._uid
-      const startTag = `vue-perf-start:${id}`
-      const endTag = `vue-perf-end:${id}`
-
-      mark(startTag)
-      const vnode = vm._render()
-      mark(endTag)
-      measure(`vue ${name} render`, startTag, endTag)
-
-      mark(startTag)
-      vm._update(vnode, hydrating)
-      mark(endTag)
-      measure(`vue ${name} patch`, startTag, endTag)
-    }
-  } else {
-    updateComponent = () => {
-      // 这里的操作就是真正的 把 插值替换为 数据的操作了
-      // 最终调用_update()
-      vm._update(vm._render(), hydrating)
-    }
+  // config.performance && mark是一些性能和埋点 已删掉
+  updateComponent = () => {
+    // 这里的操作就是真正的 把 插值替换为 数据的操作了
+    // 最终调用_update()，它的参数就是vm._render渲染出来的vnode
+    vm._update(vm._render(), hydrating)
   }
-
-  // 在 watcher 的构造函数中，将其设置为vm._watcher，因为观察者初始补丁可能调用$forceUpdate（例如在子组件的mounted中）依赖于watch已经定义
+  // 在 watcher 的构造函数中，将其设置为vm._watcher，
+  // 因为观察者初始补丁可能调用$forceUpdate（例如在子组件的mounted中）依赖于watch已经定义
   new Watcher(vm, updateComponent, noop, {
     before () {
       if (vm._isMounted && !vm._isDestroyed) {
@@ -204,7 +169,6 @@ export function mountComponent (
     }
   }, true /* isRenderWatcher */)
   hydrating = false
-
   // manually mounted instance, call mounted on self
   // mounted is called for render-created child components in its inserted hook
   if (vm.$vnode == null) {

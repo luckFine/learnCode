@@ -50,6 +50,7 @@ export default class Watcher {
     isRenderWatcher?: boolean
   ) {
     this.vm = vm
+    // 是否是渲染watcher
     if (isRenderWatcher) {
       vm._watcher = this
     }

@@ -116,7 +116,7 @@ export function createComponent (
   // 如果传入的是一个对象
   if (isObject(Ctor)) {
     // 调用vue的extend函数 把Ctor转化成一个新的构造器
-    Ctor = baseCtor.extend(Ctor)
+    Ctor = baseCtor.extend(Ctor)å
   }
 
   // if at this stage it's not a constructor or an async component factory,
@@ -223,7 +223,7 @@ export function createComponentInstanceForVnode (
     options.render = inlineTemplate.render
     options.staticRenderFns = inlineTemplate.staticRenderFns
   }
-  // Ctor是组件的构造器
+  // Ctor是组件的构造器 执行了子组件的初始化
   return new vnode.componentOptions.Ctor(options)
 }
 // 安装组件钩子
@@ -239,7 +239,7 @@ function installComponentHooks (data: VNodeData) {
     }
   }
 }
-
+// 一次执行两个函数
 function mergeHook (f1: any, f2: any): Function {
   const merged = (a, b) => {
     // flow complains about extra args which is why we use any

@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
       target
     )
   }
-
+  // 差值属性没有定义在data中时报的错误
   const warnReservedPrefix = (target, key) => {
     warn(
       `Property "${key}" must be accessed with "$data.${key}" because ` +
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV !== 'production') {
       target
     )
   }
-
+  // 判断差值属性是否早data中定义
   const hasProxy =
     typeof Proxy !== 'undefined' && isNative(Proxy)
 

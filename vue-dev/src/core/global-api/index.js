@@ -55,7 +55,8 @@ export function initGlobalAPI (Vue: GlobalAPI) {
     observe(obj)
     return obj
   }
-  // 在Vue.options 添加 'component','directive','filter' + ’s’ 的形式，并且设置为一个空对象
+  // 在Vue.options 添加 'component','directive',
+  // 'filter' + ’s’ 的形式，并且设置为一个空对象
   Vue.options = Object.create(null)
   ASSET_TYPES.forEach(type => {
     Vue.options[type + 's'] = Object.create(null)

@@ -39,6 +39,7 @@ export default class VNode {
     componentOptions?: VNodeComponentOptions,
     asyncFactory?: Function
   ) {
+    // 如果是生成组件的话，children，text，都是空，组件相关参数都在componentOptions中
      // 标签名
     this.tag = tag
     // 属性值 

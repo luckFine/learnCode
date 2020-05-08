@@ -70,7 +70,7 @@ export function renderMixin (Vue: Class<Component>) {
 
   Vue.prototype._render = function (): VNode {
     const vm: Component = this
-    // 得到render函数
+    // 在vm.$options得到render函数
     // _parentVnode开始为undefind
     const { render, _parentVnode } = vm.$options
 
@@ -81,18 +81,13 @@ export function renderMixin (Vue: Class<Component>) {
         vm.$scopedSlots
       )
     }
-
-    // set parent vnode. this allows render functions to have access
-    // to the data on the placeholder node.
+    // 设置父vnode。这允许呈现函数访问占位符节点上的数据。
     vm.$vnode = _parentVnode
-    // render self
     let vnode
     try {
-      // There's no need to maintain a stack because all render fns are called
-      // separately from one another. Nested component's render fns are called
-      // when parent component is patched.
+      // 不需要维护堆栈，因为所有渲染FN都是彼此独立调用的。在修补父组件时调用嵌套组件的渲染FN
       currentRenderingInstance = vm
-      
+      // _renderProxy 定义在render中
       vnode = render.call(vm._renderProxy, vm.$createElement)
     } catch (e) {
       handleError(e, vm, `render`)
