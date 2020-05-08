@@ -2,231 +2,539 @@
 "retcode": 0,
 "msg": "",
 "data": {
-"item": [
-{
+"items": [
+            {
 "platCode": "400128867",
 "platName": "银行",
-"cmv": 6175568288311,
-"advanceDeclineRatio": 1.91,
-"netInflow": 2228986271.2000003,
-"platSnapShot": { }
-},
-{
+"cmv": 6173777333387,
+"advanceDeclineRatio": -0.62,
+"netInflow": -268626750.34000003,
+"platSnapShot": {
+"platName": "银行",
+"securityId": "400128867",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 2897.14,
+"pxChgRatio": -0.61,
+"upCount": 9,
+"downCount": 22,
+"equalCount": 5,
+"netInflow": -268626750.34000003
+                }
+            },
+            {
 "platCode": "400128857",
 "platName": "医药生物",
-"cmv": 4076146681538,
-"advanceDeclineRatio": -0.39,
-"netInflow": -573298726.3999996,
-"platSnapShot": { }
-},
-{
+"cmv": 4050824913999,
+"advanceDeclineRatio": -1.75,
+"netInflow": -4262917459.989998,
+"platSnapShot": {
+"platName": "医药生物",
+"securityId": "400128857",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 17168.02,
+"pxChgRatio": -1.75,
+"upCount": 65,
+"downCount": 232,
+"equalCount": 2,
+"netInflow": -4262917459.989998
+                }
+            },
+            {
 "platCode": "400128855",
 "platName": "食品饮料",
-"cmv": 3820698379780,
-"advanceDeclineRatio": -0.44,
-"netInflow": -825907855.6899998,
-"platSnapShot": { }
-},
-{
+"cmv": 3909108638461,
+"advanceDeclineRatio": 0.4,
+"netInflow": 2218137821.080001,
+"platSnapShot": {
+"platName": "食品饮料",
+"securityId": "400128855",
+"timeString": "13:33:33",
+"quotationTime": 1588052013000,
+"lastPx": 7962.29,
+"pxChgRatio": 0.39,
+"upCount": 50,
+"downCount": 45,
+"equalCount": 1,
+"netInflow": 2218137821.080001
+                }
+            },
+            {
 "platCode": "400128868",
 "platName": "非银金融",
-"cmv": 3775609846703,
-"advanceDeclineRatio": -0.22,
-"netInflow": -641739699.8699998,
-"platSnapShot": { }
-},
-{
+"cmv": 3808615604859,
+"advanceDeclineRatio": 0.24,
+"netInflow": 1981706367.4799995,
+"platSnapShot": {
+"platName": "非银金融",
+"securityId": "400128868",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 4433.76,
+"pxChgRatio": 0.25,
+"upCount": 52,
+"downCount": 24,
+"equalCount": 3,
+"netInflow": 1981706367.4799995
+                }
+            },
+            {
 "platCode": "400128860",
 "platName": "电子",
-"cmv": 3039254076598,
-"advanceDeclineRatio": -1.03,
-"netInflow": -1863486406.100001,
-"platSnapShot": { }
-},
-{
+"cmv": 3084585635705,
+"advanceDeclineRatio": -0.41,
+"netInflow": 3971777683.059999,
+"platSnapShot": {
+"platName": "电子",
+"securityId": "400128860",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 19341.49,
+"pxChgRatio": -0.41,
+"upCount": 92,
+"downCount": 152,
+"equalCount": 2,
+"netInflow": 3971777683.059999
+                }
+            },
+            {
 "platCode": "400128843",
 "platName": "化工",
-"cmv": 2417856654214,
-"advanceDeclineRatio": -0.92,
-"netInflow": -2359468238.150001,
-"platSnapShot": { }
-},
-{
+"cmv": 2374160366965,
+"advanceDeclineRatio": -2.15,
+"netInflow": -3683434422.180001,
+"platSnapShot": {
+"platName": "化工",
+"securityId": "400128843",
+"timeString": "13:33:33",
+"quotationTime": 1588052013000,
+"lastPx": 6474.15,
+"pxChgRatio": -2.15,
+"upCount": 57,
+"downCount": 281,
+"equalCount": 3,
+"netInflow": -3683434422.180001
+                }
+            },
+            {
 "platCode": "400128861",
 "platName": "计算机",
-"cmv": 2054966307032,
-"advanceDeclineRatio": -1.3,
-"netInflow": -3658142634.559996,
-"platSnapShot": { }
-},
-{
+"cmv": 2042729127213,
+"advanceDeclineRatio": -2.24,
+"netInflow": -4472611670.05,
+"platSnapShot": {
+"platName": "计算机",
+"securityId": "400128861",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 25317.81,
+"pxChgRatio": -2.24,
+"upCount": 41,
+"downCount": 169,
+"equalCount": 2,
+"netInflow": -4472611670.05
+                }
+            },
+            {
 "platCode": "400128866",
 "platName": "房地产",
-"cmv": 1831406207640,
-"advanceDeclineRatio": 0.47,
-"netInflow": 450395820.18,
-"platSnapShot": { }
-},
-{
+"cmv": 1826514629791,
+"advanceDeclineRatio": -0.89,
+"netInflow": 77370420.31999998,
+"platSnapShot": {
+"platName": "房地产",
+"securityId": "400128866",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 2695.51,
+"pxChgRatio": -0.89,
+"upCount": 35,
+"downCount": 92,
+"equalCount": 2,
+"netInflow": 77370420.31999998
+                }
+            },
+            {
 "platCode": "400128864",
 "platName": "公用事业",
-"cmv": 1701513320824,
-"advanceDeclineRatio": -0.19,
-"netInflow": -242974416.78999996,
-"platSnapShot": { }
-},
-{
+"cmv": 1688151351906,
+"advanceDeclineRatio": -1.55,
+"netInflow": -696341853.44,
+"platSnapShot": {
+"platName": "公用事业",
+"securityId": "400128864",
+"timeString": "13:33:33",
+"quotationTime": 1588052013000,
+"lastPx": 3102.22,
+"pxChgRatio": -1.54,
+"upCount": 23,
+"downCount": 136,
+"equalCount": 4,
+"netInflow": -696341853.44
+                }
+            },
+            {
 "platCode": "400128849",
 "platName": "机械设备",
-"cmv": 1667008906562,
-"advanceDeclineRatio": -0.73,
-"netInflow": -2330717010.1399994,
-"platSnapShot": { }
-},
-{
+"cmv": 1636385208581,
+"advanceDeclineRatio": -2.4,
+"netInflow": -3576500534.2999997,
+"platSnapShot": {
+"platName": "机械设备",
+"securityId": "400128849",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 7423.06,
+"pxChgRatio": -2.4,
+"upCount": 44,
+"downCount": 294,
+"equalCount": 4,
+"netInflow": -3576500534.2999997
+                }
+            },
+            {
 "platCode": "400128865",
 "platName": "交通运输",
-"cmv": 1637186815233,
-"advanceDeclineRatio": -0.54,
-"netInflow": -656560252.5999999,
-"platSnapShot": { }
-},
-{
+"cmv": 1631055922596,
+"advanceDeclineRatio": -1.19,
+"netInflow": -284210309.68,
+"platSnapShot": {
+"platName": "交通运输",
+"securityId": "400128865",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 3292.65,
+"pxChgRatio": -1.19,
+"upCount": 25,
+"downCount": 89,
+"equalCount": 2,
+"netInflow": -284210309.68
+                }
+            },
+            {
 "platCode": "400128842",
 "platName": "采掘",
-"cmv": 1542104003213,
-"advanceDeclineRatio": -0.86,
-"netInflow": -880448734.47,
-"platSnapShot": { }
-},
-{
+"cmv": 1516668505384,
+"advanceDeclineRatio": -2.61,
+"netInflow": -687843133.6099998,
+"platSnapShot": {
+"platName": "采掘",
+"securityId": "400128842",
+"timeString": "13:33:32",
+"quotationTime": 1588052012000,
+"lastPx": 1112.84,
+"pxChgRatio": -2.62,
+"upCount": 3,
+"downCount": 63,
+"equalCount": 1,
+"netInflow": -687843133.6099998
+                }
+            },
+            {
 "platCode": "400128848",
 "platName": "电气设备",
-"cmv": 1483374034676,
-"advanceDeclineRatio": -0.05,
-"netInflow": 439164089.77,
-"platSnapShot": { }
-},
-{
+"cmv": 1479343588912,
+"advanceDeclineRatio": -2.36,
+"netInflow": -1538903950.54,
+"platSnapShot": {
+"platName": "电气设备",
+"securityId": "400128848",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 5725.56,
+"pxChgRatio": -2.36,
+"upCount": 36,
+"downCount": 156,
+"equalCount": 2,
+"netInflow": -1538903950.54
+                }
+            },
+            {
 "platCode": "400128851",
 "platName": "汽车",
-"cmv": 1300370439929,
-"advanceDeclineRatio": -1.39,
-"netInflow": -1884742488.0999994,
-"platSnapShot": { }
-},
-{
+"cmv": 1287171015875,
+"advanceDeclineRatio": -1.56,
+"netInflow": -816769961.4500006,
+"platSnapShot": {
+"platName": "汽车",
+"securityId": "400128851",
+"timeString": "13:33:27",
+"quotationTime": 1588052007000,
+"lastPx": 6337.3,
+"pxChgRatio": -1.56,
+"upCount": 42,
+"downCount": 132,
+"equalCount": 2,
+"netInflow": -816769961.4500006
+                }
+            },
+            {
 "platCode": "400128862",
 "platName": "传媒",
-"cmv": 1284781857150,
-"advanceDeclineRatio": -1.13,
-"netInflow": -2062100813.17,
-"platSnapShot": { }
-},
-{
-"platCode": "400128847",
-"platName": "建筑装饰",
-"cmv": 1167946093412,
-"advanceDeclineRatio": -1.09,
-"netInflow": -984045028.63,
-"platSnapShot": { }
-},
-{
+"cmv": 1277821444934,
+"advanceDeclineRatio": -2.1,
+"netInflow": -1470851637.0500004,
+"platSnapShot": {
+"platName": "传媒",
+"securityId": "400128862",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 10005.69,
+"pxChgRatio": -2.09,
+"upCount": 36,
+"downCount": 128,
+"equalCount": 2,
+"netInflow": -1470851637.0500004
+                }
+            },
+            {
 "platCode": "400128852",
 "platName": "家用电器",
-"cmv": 1149745319477,
-"advanceDeclineRatio": -0.44,
-"netInflow": -153493476.65999997,
-"platSnapShot": { }
-},
-{
+"cmv": 1157266657507,
+"advanceDeclineRatio": -1.38,
+"netInflow": 56414324.560000055,
+"platSnapShot": {
+"platName": "家用电器",
+"securityId": "400128852",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 6460.25,
+"pxChgRatio": -1.38,
+"upCount": 18,
+"downCount": 40,
+"equalCount": 0,
+"netInflow": 56414324.560000055
+                }
+            },
+            {
+"platCode": "400128847",
+"platName": "建筑装饰",
+"cmv": 1146332931175,
+"advanceDeclineRatio": -2.47,
+"netInflow": -1521943338.0500004,
+"platSnapShot": {
+"platName": "建筑装饰",
+"securityId": "400128847",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 6679.47,
+"pxChgRatio": -2.47,
+"upCount": 11,
+"downCount": 115,
+"equalCount": 2,
+"netInflow": -1521943338.0500004
+                }
+            },
+            {
 "platCode": "400128845",
 "platName": "有色金属",
-"cmv": 1147610132730,
-"advanceDeclineRatio": -0.93,
-"netInflow": -1690062698.7899995,
-"platSnapShot": { }
-},
-{
+"cmv": 1124162597324,
+"advanceDeclineRatio": -2.02,
+"netInflow": -2231447321.3400006,
+"platSnapShot": {
+"platName": "有色金属",
+"securityId": "400128845",
+"timeString": "13:33:33",
+"quotationTime": 1588052013000,
+"lastPx": 4378.72,
+"pxChgRatio": -2.01,
+"upCount": 18,
+"downCount": 96,
+"equalCount": 1,
+"netInflow": -2231447321.3400006
+                }
+            },
+            {
 "platCode": "400128854",
 "platName": "农林牧渔",
-"cmv": 1087665831760,
-"advanceDeclineRatio": -0.19,
-"netInflow": -633624658.49,
-"platSnapShot": { }
-},
-{
+"cmv": 1080065816435,
+"advanceDeclineRatio": -1.97,
+"netInflow": -1608690237.42,
+"platSnapShot": {
+"platName": "农林牧渔",
+"securityId": "400128854",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 5505.55,
+"pxChgRatio": -1.96,
+"upCount": 19,
+"downCount": 67,
+"equalCount": 0,
+"netInflow": -1608690237.42
+                }
+            },
+            {
 "platCode": "400128863",
 "platName": "通信",
-"cmv": 888680275510,
-"advanceDeclineRatio": 0.1,
-"netInflow": 370497290.1299999,
-"platSnapShot": { }
-},
-{
+"cmv": 874469366096,
+"advanceDeclineRatio": -2.6,
+"netInflow": -2716380694.99,
+"platSnapShot": {
+"platName": "通信",
+"securityId": "400128863",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 15562.06,
+"pxChgRatio": -2.6,
+"upCount": 16,
+"downCount": 84,
+"equalCount": 0,
+"netInflow": -2716380694.99
+                }
+            },
+            {
 "platCode": "400128850",
 "platName": "国防军工",
-"cmv": 756090780379,
-"advanceDeclineRatio": -2.69,
-"netInflow": -2078520503.5400002,
-"platSnapShot": { }
-},
-{
+"cmv": 744456229370,
+"advanceDeclineRatio": -2.81,
+"netInflow": -1451173940.4899998,
+"platSnapShot": {
+"platName": "国防军工",
+"securityId": "400128850",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 59098.51,
+"pxChgRatio": -2.81,
+"upCount": 9,
+"downCount": 58,
+"equalCount": 1,
+"netInflow": -1451173940.4899998
+                }
+            },
+            {
 "platCode": "400128846",
 "platName": "建筑材料",
-"cmv": 718223906175,
-"advanceDeclineRatio": 0.09,
-"netInflow": 272181788.4699999,
-"platSnapShot": { }
-},
-{
+"cmv": 716683996357,
+"advanceDeclineRatio": -1.59,
+"netInflow": -286580222.54,
+"platSnapShot": {
+"platName": "建筑材料",
+"securityId": "400128846",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 4957.18,
+"pxChgRatio": -1.59,
+"upCount": 18,
+"downCount": 49,
+"equalCount": 0,
+"netInflow": -286580222.54
+                }
+            },
+            {
 "platCode": "400128858",
 "platName": "商业贸易",
-"cmv": 630829514504,
-"advanceDeclineRatio": 0.41,
-"netInflow": 601189323.7900001,
-"platSnapShot": { }
-},
-{
+"cmv": 619611935494,
+"advanceDeclineRatio": -1.76,
+"netInflow": -913999912.9,
+"platSnapShot": {
+"platName": "商业贸易",
+"securityId": "400128858",
+"timeString": "13:33:33",
+"quotationTime": 1588052013000,
+"lastPx": 2531.91,
+"pxChgRatio": -1.75,
+"upCount": 17,
+"downCount": 74,
+"equalCount": 3,
+"netInflow": -913999912.9
+                }
+            },
+            {
 "platCode": "400128853",
 "platName": "轻工制造",
-"cmv": 619411435321,
-"advanceDeclineRatio": -0.89,
-"netInflow": -462338774.5800001,
-"platSnapShot": { }
-},
-{
+"cmv": 612361197288,
+"advanceDeclineRatio": -2.2,
+"netInflow": -1139522103.46,
+"platSnapShot": {
+"platName": "轻工制造",
+"securityId": "400128853",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 6957.66,
+"pxChgRatio": -2.2,
+"upCount": 24,
+"downCount": 104,
+"equalCount": 2,
+"netInflow": -1139522103.46
+                }
+            },
+            {
 "platCode": "400128844",
 "platName": "钢铁",
-"cmv": 500478235764,
-"advanceDeclineRatio": -0.1,
-"netInflow": -299797935.41,
-"platSnapShot": { }
-},
-{
-"platCode": "400128856",
-"platName": "纺织服装",
-"cmv": 322745294028,
-"advanceDeclineRatio": -1.31,
-"netInflow": -302811105.75,
-"platSnapShot": { }
-},
-{
+"cmv": 493884260357,
+"advanceDeclineRatio": -1.46,
+"netInflow": -286872078.6100001,
+"platSnapShot": {
+"platName": "钢铁",
+"securityId": "400128844",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 1320.91,
+"pxChgRatio": -1.42,
+"upCount": 3,
+"downCount": 30,
+"equalCount": 0,
+"netInflow": -286872078.6100001
+                }
+            },
+            {
 "platCode": "400128859",
 "platName": "休闲服务",
-"cmv": 320398856660,
-"advanceDeclineRatio": -0.92,
-"netInflow": -139348427.89000008,
-"platSnapShot": { }
-},
-{
+"cmv": 325801348923,
+"advanceDeclineRatio": -2.31,
+"netInflow": -166011629.2,
+"platSnapShot": {
+"platName": "休闲服务",
+"securityId": "400128859",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 3883.37,
+"pxChgRatio": -2.32,
+"upCount": 5,
+"downCount": 29,
+"equalCount": 0,
+"netInflow": -166011629.2
+                }
+            },
+            {
+"platCode": "400128856",
+"platName": "纺织服装",
+"cmv": 314989060943,
+"advanceDeclineRatio": -2.33,
+"netInflow": -582516614.72,
+"platSnapShot": {
+"platName": "纺织服装",
+"securityId": "400128856",
+"timeString": "13:33:30",
+"quotationTime": 1588052010000,
+"lastPx": 4504.96,
+"pxChgRatio": -2.33,
+"upCount": 13,
+"downCount": 70,
+"equalCount": 1,
+"netInflow": -582516614.72
+                }
+            },
+            {
 "platCode": "400128869",
 "platName": "综合",
-"cmv": 161961116318,
-"advanceDeclineRatio": -0.94,
-"netInflow": -326107391.82,
-"platSnapShot": { }
-}
-]
-}
+"cmv": 158089897321,
+"advanceDeclineRatio": -0.69,
+"netInflow": -42319967.719999954,
+"platSnapShot": {
+"platName": "综合",
+"securityId": "400128869",
+"timeString": "13:33:24",
+"quotationTime": 1588052004000,
+"lastPx": 3246.26,
+"pxChgRatio": -0.69,
+"upCount": 9,
+"downCount": 23,
+"equalCount": 1,
+"netInflow": -42319967.719999954
+                }
+            }
+        ]
+    }
 }

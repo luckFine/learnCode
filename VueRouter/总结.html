@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        // 1、vue编写插件的时候，通常提供静态的install方法
+        // 2、Vue-Router的install方法会给每一个组件注入beforeCreated和destoryed钩子函数，在beforeCreated中做一些私有属性定义和路由初始化工作
+
+        // 路由初始化的时机是在组件的初始化阶段 执行beforeCreate钩子函数的时候会执行router.init方法，然后又会执行history.transitionTo方法做路由过度
+
+        // createMatcher的初始化逻辑  了解matcher的匹配过程
+
+    </script>
+</body>
+</html>
