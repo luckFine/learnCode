@@ -8,22 +8,60 @@ import { fillParams } from './util/params'
 import { createRouteMap } from './create-route-map'
 import { normalizeLocation } from './util/location'
 
+// Matcher是一个对象，返回了2个方法，match和addRoutes
 export type Matcher = {
   match: (raw: RawLocation, current?: Route, redirectedFrom?: Location) => Route;
   addRoutes: (routes: Array<RouteConfig>) => void;
 };
 
+// Location的数据结构
+/*
+ Location = {
+  _normalized ?: boolean;
+  name ?: string;
+  path ?: string; 路径
+  hash ?: string; 
+  query ?: Dictionary<string>;
+  params ?: Dictionary<string>;
+  append ?: boolean;
+  replace ?: boolean;
+} 
+*/
+// Route的数据结构
+/*
+Route = {
+  path: string;
+  name: ?string;
+  hash: string;
+  query: Dictionary<string>;
+  params: Dictionary<string>;
+  fullPath: string;
+  matched: Array<RouteRecord>;
+  redirectedFrom?: string;
+  meta?: any;
+}
+
+
+
+*/
+
+// createMatcher接受2个参数，
+// 一个是router  是new VueRouter()返回的实例
+// 一个是routes 用户定义的路由配置
 export function createMatcher (
   routes: Array<RouteConfig>,
   router: VueRouter
 ): Matcher {
-  // 
+  // 创建一个映射表
   const { pathList, pathMap, nameMap } = createRouteMap(routes)
-
+  // addRoutes 方法的作用是动态添加路由配，动态添加的时候再次调用createRouteMap即可
   function addRoutes (routes) {
     createRouteMap(routes, pathList, pathMap, nameMap)
   }
-
+  // row 可以是一个url字符串，也可以是一个Location对象
+  // currentRoute  Route 类型，它表示当前的路径
+  // redirectedFrom 和重定向相关
+  // match 方法返回的是一个路径，它的作用是根据传入的 raw 和当前的路径 currentRoute 计算出一个新的路径并返回
   function match (
     raw: RawLocation,
     currentRoute?: Route,

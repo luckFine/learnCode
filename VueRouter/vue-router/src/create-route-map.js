@@ -3,7 +3,7 @@
 import Regexp from 'path-to-regexp'
 import { cleanPath } from './util/path'
 import { assert, warn } from './util/warn'
-
+// 创建路由的映射表
 export function createRouteMap (
   routes: Array<RouteConfig>,
   oldPathList?: Array<string>,
@@ -13,14 +13,34 @@ export function createRouteMap (
   pathList: Array<string>,
   pathMap: Dictionary<RouteRecord>,
   nameMap: Dictionary<RouteRecord>
-} {
-  // the path list is used to control path matching priority
+  } {
+  
+  /*
+
+  RouteRecord 的数据结构
+  RouteRecord = {
+    path: string;
+    regex: RouteRegExp;
+    components: Dictionary<any>;
+    instances: Dictionary<any>;
+    name: ?string;
+    parent: ?RouteRecord;
+    redirect: ?RedirectOption;
+    matchAs: ?string;
+    beforeEnter: ?NavigationGuard;
+    meta: any;
+    props: boolean | Object | Function | Dictionary<boolean | Object | Function>;
+}
+  */
+  
+  // createRouteMap 函数的目标是把用户的路由配置转换成一张路由映射表 
+  // 存储所有的path
   const pathList: Array<string> = oldPathList || []
-  // $flow-disable-line
+  // pathMap 表示一个 path 到 RouteRecord 的映射关系
   const pathMap: Dictionary<RouteRecord> = oldPathMap || Object.create(null)
-  // $flow-disable-line
+  // nameMap 表示 name 到 RouteRecord 的映射关系
   const nameMap: Dictionary<RouteRecord> = oldNameMap || Object.create(null)
-  // routes是一个数组，拿到路由配置的对象
+  // routes是一个数组，拿到路由配置的对象，遍历创建映射
   routes.forEach(route => {
     addRouteRecord(pathList, pathMap, nameMap, route)
   })
@@ -45,7 +65,7 @@ export function createRouteMap (
       warn(false, `Non-nested routes must include a leading slash character. Fix the following routes: \n${pathNames}`)
     }
   }
-
+  // 整个createRouteMap方法结束，会得到pathList，pathMap，nameMap
   return {
     pathList,
     pathMap,
@@ -63,19 +83,19 @@ function addRouteRecord (
 ) {
   // 拿到配置的path和name
   const { path, name } = route
-  if (process.env.NODE_ENV !== 'production') {
-    assert(path != null, `"path" is required in a route configuration.`)
-    assert(
-      typeof route.component !== 'string',
-      `route config "component" for path: ${String(
-        path || name
-      )} cannot be a ` + `string id. Use an actual component instead.`
-    )
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   assert(path != null, `"path" is required in a route configuration.`)
+  //   assert(
+  //     typeof route.component !== 'string',
+  //     `route config "component" for path: ${String(
+  //       path || name
+  //     )} cannot be a ` + `string id. Use an actual component instead.`
+  //   )
+  // }
   // 路径的正则配置
   const pathToRegexpOptions: PathToRegexpOptions =
     route.pathToRegexpOptions || {}
-  // 
+  // 规范化的路径
   const normalizedPath = normalizePath(path, parent, pathToRegexpOptions.strict)
 
   if (typeof route.caseSensitive === 'boolean') {
@@ -105,24 +125,25 @@ function addRouteRecord (
     // Warn if route is named, does not redirect and has a default child route.
     // If users navigate to this route by name, the default child will
     // not be rendered (GH Issue #629)
-    if (process.env.NODE_ENV !== 'production') {
-      if (
-        route.name &&
-        !route.redirect &&
-        route.children.some(child => /^\/?$/.test(child.path))
-      ) {
-        warn(
-          false,
-          `Named Route '${route.name}' has a default child route. ` +
-            `When navigating to this named route (:to="{name: '${
-              route.name
-            }'"), ` +
-            `the default child route will not be rendered. Remove the name from ` +
-            `this route and use the name of the default child route for named ` +
-            `links instead.`
-        )
-      }
-    }
+    // if (process.env.NODE_ENV !== 'production') {
+    //   if (
+    //     route.name &&
+    //     !route.redirect &&
+    //     route.children.some(child => /^\/?$/.test(child.path))
+    //   ) {
+    //     warn(
+    //       false,
+    //       `Named Route '${route.name}' has a default child route. ` +
+    //         `When navigating to this named route (:to="{name: '${
+    //           route.name
+    //         }'"), ` +
+    //         `the default child route will not be rendered. Remove the name from ` +
+    //         `this route and use the name of the default child route for named ` +
+    //         `links instead.`
+    //     )
+    //   }
+    // }
+    // 整个 RouteRecord 也就是一个树型结构
     route.children.forEach(child => {
       const childMatchAs = matchAs
         ? cleanPath(`${matchAs}/${child.path}`)
@@ -130,40 +151,40 @@ function addRouteRecord (
       addRouteRecord(pathList, pathMap, nameMap, child, record, childMatchAs)
     })
   }
-
+  // 为 pathList 和 pathMap 各添加一条记录
   if (!pathMap[record.path]) {
     pathList.push(record.path)
     pathMap[record.path] = record
   }
 
-  if (route.alias !== undefined) {
-    const aliases = Array.isArray(route.alias) ? route.alias : [route.alias]
-    for (let i = 0; i < aliases.length; ++i) {
-      const alias = aliases[i]
-      if (process.env.NODE_ENV !== 'production' && alias === path) {
-        warn(
-          false,
-          `Found an alias with the same value as the path: "${path}". You have to remove that alias. It will be ignored in development.`
-        )
-        // skip in dev to make it work
-        continue
-      }
+  // if (route.alias !== undefined) {
+  //   const aliases = Array.isArray(route.alias) ? route.alias : [route.alias]
+  //   for (let i = 0; i < aliases.length; ++i) {
+  //     const alias = aliases[i]
+  //     if (process.env.NODE_ENV !== 'production' && alias === path) {
+  //       warn(
+  //         false,
+  //         `Found an alias with the same value as the path: "${path}". You have to remove that alias. It will be ignored in development.`
+  //       )
+  //       // skip in dev to make it work
+  //       continue
+  //     }
 
-      const aliasRoute = {
-        path: alias,
-        children: route.children
-      }
-      addRouteRecord(
-        pathList,
-        pathMap,
-        nameMap,
-        aliasRoute,
-        parent,
-        record.path || '/' // matchAs
-      )
-    }
-  }
-
+  //     const aliasRoute = {
+  //       path: alias,
+  //       children: route.children
+  //     }
+  //     addRouteRecord(
+  //       pathList,
+  //       pathMap,
+  //       nameMap,
+  //       aliasRoute,
+  //       parent,
+  //       record.path || '/' // matchAs
+  //     )
+  //   }
+  // }
+  // 如果定义了name,给name添加一条记录
   if (name) {
     if (!nameMap[name]) {
       nameMap[name] = record

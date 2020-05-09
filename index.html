@@ -7,34 +7,165 @@
 </head>
 <body>
     <script>
-    Array.prototype.map = function (callbackFn, thisArg) {
-        // 处理数组类型异常
-        if (this === null || this === undefined) {
-            throw new TypeError('Cannot read property "map" of null or undefined')
-        }
-        // 处理回调类型异常
-        if (Object.prototype.toString.call(callbackFn) != "[object Function]") {
-            throw new TypeError(callbackFn + ' is not a function')
-        }
-        // 草案中提到要先转换为对象
-        let O = Object(this); // [1,2,3]
-        let T = thisArg;
-        let len = O.length >>> 0;
-        // 创建一个与参数数组个数一样的数组
-        let A = new Array(len);
-        for (let k = 0; k < len; k++) {
-            // 还记得原型链那一节提到的 in 吗？in 表示在原型链查找
-            // 如果用 hasOwnProperty 是有问题的，它只能找私有属性
-            if (k in O) {
-                let kValue = O[k];
-                // 依次传入this, 当前项，当前索引，整个数组
-                let mappedValue = callbackFn.call(T, kValue, k, O);
-                A[k] = mappedValue;
-            }
-        }
-        return A;
-    }
+    // Array.prototype.map = function (callbackFn, thisArg) {
+    //     // 处理数组类型异常
+    //     if (this === null || this === undefined) {
+    //         throw new TypeError('Cannot read property "map" of null or undefined')
+    //     }
+    //     // 处理回调类型异常
+    //     if (Object.prototype.toString.call(callbackFn) != "[object Function]") {
+    //         throw new TypeError(callbackFn + ' is not a function')
+    //     }
+    //     // 草案中提到要先转换为对象
+    //     let O = Object(this); // [1,2,3]
+    //     let T = thisArg;
+    //     let len = O.length >>> 0;
+    //     // 创建一个与参数数组个数一样的数组
+    //     let A = new Array(len);
+    //     for (let k = 0; k < len; k++) {
+    //         // 还记得原型链那一节提到的 in 吗？in 表示在原型链查找
+    //         // 如果用 hasOwnProperty 是有问题的，它只能找私有属性
+    //         if (k in O) {
+    //             let kValue = O[k];
+    //             // 依次传入this, 当前项，当前索引，整个数组
+    //             let mappedValue = callbackFn.call(T, kValue, k, O);
+    //             A[k] = mappedValue;
+    //         }
+    //     }
+    //     return A;
+    // }
+    // function Foo() {
+    //     getName = function () { alert(1); };
+    //     return this;
+    // }
+    // Foo.getName = function () { alert(2); };
+    // Foo.prototype.getName = function () { alert(3); };
+    // var getName = function () { alert(4); };
+    // function getName() { alert(5); }
 
-    </script>
+    // //请写出以下输出结果：
+    // Foo.getName();
+    // getName();
+    // Foo().getName();
+    // getName();
+    // new Foo.getName();
+    // new Foo().getName();
+    // new new Foo().getName();
+
+    // const someone = {
+    //     name:'luckfine',
+    //     stars:'zs',
+    //     money:0
+    // }
+    // let obj = new Proxy(someone, {
+    //     get: function (target, propKey, receiver) {
+    //         console.log(`getting ${propKey}!`);
+    //         return Reflect.get(target, propKey, receiver);
+    //     },
+    //     set: function (target, propKey, value, receiver) {
+    //         console.log(`setting ${propKey}!`);
+    //         return Reflect.set(target, propKey, value, receiver);
+    //     }
+    // });
+    // obj.money++
+    // // getting money!
+    // // setting money!
+    // console.log(obj.money)
+    // getting money!
+    // 1
+
+    // let obj = new Proxy({}, {
+    //     // 拦截对象属性的读取,比如proxy.foo和proxy['foo']
+    //     get: function (target, propKey, receiver) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截对象属性的设置，比如proxy.foo = v或proxy['foo'] = v，返回一个布尔值
+    //     set: function (target, propKey, value, receiver) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截propKey in proxy的操作，返回一个布尔值
+    //     has: function (target, propKey, receiver) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截delete proxy[propKey]的操作，返回一个布尔值。
+    //     deleteProperty: function (target, propKey) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for...in循环，
+    //     // 返回一个数组。该方法返回目标对象所有自身的属性的属性名，
+    //     // 而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。
+    //     ownKeys:function(target){
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象
+    //     getOwnPropertyDescriptor: function (target, propKey) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。
+    //     defineProperty: function (target, propKey, propDesc) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截Object.preventExtensions(proxy)，返回一个布尔值。
+    //     preventExtensions: function (target) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截Object.getPrototypeOf(proxy)，返回一个对象
+    //     getPrototypeOf: function (target) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截Object.isExtensible(proxy)，返回一个布尔值。
+    //     isExtensible: function (target) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截Object.setPrototypeOf(proxy, proto)，返回一个布尔值。
+    //     // 如果目标对象是函数，那么还有两种额外操作可以拦截。
+    //     setPrototypeOf: function (target, proto) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截 Proxy 实例作为函数调用的操作，比如proxy(...args)、
+    //     // proxy.call(object, ...args)、proxy.apply(...)。
+    //     apply: function (target, object, args) {
+    //         console.log('sonme code ....')
+    //     },
+    //     // 拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(...args)。
+    //     construct:function (target, args) {
+
+    //     }
+    // });
+
+
+    // const dom = new Proxy({}, {
+    //     get(target, property) {
+    //         return function (attrs = {}, ...children) {
+    //             const el = document.createElement(property);
+    //             for (let prop of Object.keys(attrs)) {
+    //                 el.setAttribute(prop, attrs[prop]);
+    //             }
+    //             for (let child of children) {
+    //                 if (typeof child === 'string') {
+    //                     child = document.createTextNode(child);
+    //                 }
+    //                 el.appendChild(child);
+    //             }
+    //             return el;
+    //         }
+    //     }
+    // });
+
+    // const el = dom.div({},
+    //     'Hello, my name is ',
+    //     dom.a({ href: '//example.com' }, 'Mark'),
+    //     '. I like:',
+    //     dom.ul({},
+    //         dom.li({}, 'The web'),
+    //         dom.li({}, 'Food'),
+    //         dom.li({}, '…actually that\'s it')
+    //     )
+    // );
+
+    // document.body.appendChild(el);
+    
+
+</script>
 </body>
 </html>

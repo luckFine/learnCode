@@ -39,7 +39,8 @@ export default class VueRouter {
     this.beforeHooks = []
     this.resolveHooks = []
     this.afterHooks = []
-    // 调用createMatcher函数
+    // 调用createMatcher函数 传入用户定义的路由配置 和 当前router实例
+    // createMatcher是一个对象， 暴露了match 和 addRoutes
     this.matcher = createMatcher(options.routes || [], this)
     // 获取路由定义的模式  history/hash
     let mode = options.mode || 'hash'
@@ -106,15 +107,17 @@ export default class VueRouter {
     if (this.app) {
       return
     }
-
+    // 并且把app赋值给this.app
     this.app = app
-
+    //  this.history 为构造函数中根据mode匹配的HTML5History，或者HashHistory 或者AbstractHistory
     const history = this.history
     // HTML5History和HashHistory等其实都是继承于History
     // 判断mode 执行不同逻辑
     if (history instanceof HTML5History) {
+      // 路径切换
       history.transitionTo(history.getCurrentLocation())
     } else if (history instanceof HashHistory) {
+
       const setupHashListener = () => {
         history.setupListeners()
       }
