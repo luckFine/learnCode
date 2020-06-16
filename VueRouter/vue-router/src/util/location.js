@@ -6,7 +6,11 @@ import { resolveQuery } from './query'
 import { fillParams } from './params'
 import { warn } from './warn'
 import { extend } from './misc'
-
+// normalizeLocation的作用是根据raw，current计算出新的location
+// 主要处理了 raw 的两种情况，
+// 一种是有 params 且没有 path，
+// 一种是有 path 的，
+// 对于第一种情况，如果 current 有 name，则计算出的 location 也有 name
 export function normalizeLocation (
   raw: RawLocation,
   current: ?Route,

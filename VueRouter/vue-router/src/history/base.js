@@ -62,13 +62,15 @@ export class History {
     this.errorCbs.push(errorCb)
   }
   // 路径切换相关函数
+  // 传入跳转地址，成功回调，失败回调
   transitionTo (
     location: RawLocation,
     onComplete?: Function,
     onAbort?: Function
 ) {
     // 拿到对应匹配的路径
-    const route = this.router.match(location, this.current)
+  const route = this.router.match(location, this.current)
+  // 完整真正的路径切换
     this.confirmTransition(
       route,
       () => {
@@ -97,7 +99,7 @@ export class History {
       }
     )
   }
-
+  // confirmTransition的实现方法，route是跳转路径，onComplete成功回调 onAbort失败回调 取消浙西跳转
   confirmTransition (route: Route, onComplete: Function, onAbort?: Function) {
     const current = this.current
     const abort = err => {
@@ -117,6 +119,7 @@ export class History {
       }
       onAbort && onAbort(err)
     }
+  // 判断当前路径和要跳转的路径是否一致
     if (
       isSameRoute(route, current) &&
       // in the case the route map has been dynamically appended to
@@ -125,12 +128,12 @@ export class History {
       this.ensureURL()
       return abort(new NavigationDuplicated(route))
     }
-
+    // updated, deactivated, activated 都是数组
     const { updated, deactivated, activated } = resolveQueue(
       this.current.matched,
       route.matched
     )
-
+      // queue就是NavigationGuard的一维数组
     const queue: Array<?NavigationGuard> = [].concat(
       // in-component leave guards
       extractLeaveGuards(deactivated),
@@ -144,7 +147,8 @@ export class History {
       resolveAsyncComponents(activated)
     )
 
-    this.pending = route
+  this.pending = route
+  // 定义了一个迭代器函数
     const iterator = (hook: NavigationGuard, next) => {
       if (this.pending !== route) {
         return abort()
@@ -176,12 +180,11 @@ export class History {
         abort(e)
       }
     }
-
+    // 把函数存到数组中
     runQueue(queue, iterator, () => {
       const postEnterCbs = []
       const isValid = () => this.current === route
-      // wait until async components are resolved before
-      // extracting in-component enter guards
+      // 在提取入组件enter guards之前，等待异步组件被解析
       const enterGuards = extractEnterGuards(activated, postEnterCbs, isValid)
       const queue = enterGuards.concat(this.router.resolveHooks)
       runQueue(queue, iterator, () => {

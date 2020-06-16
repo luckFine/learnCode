@@ -11,8 +11,8 @@
         <a href="#/page1">page1</a>
         <a href="#/page2">page2</a>
         <a href="#/page3">page3</a>
-    </div>
-    <div id="container"></div> -->
+    </div> -->
+    <!-- <div id="container"></div> -->
     <div id="history">
         <a href="/page1">page1</a>
         <a href="/page2">page2</a>
@@ -95,74 +95,75 @@
     // 处理其他页
     
     // 通过history也可以实现不刷新实现页面跳转 
-    // class Router {
-    //     constructor(){
-    //         this.routers = {}; 
-    //         this.listenPopState()
-    //         this.listenLick()
-    //     }
-    //     // 监听popState
-    //     listenPopState(){
-    //         window.addEventListener('popState',(e) => {
-    //             let state = e.state || {} ;
-    //             let path = state.path || '' ;
-    //             this.handler(path);
-    //         })
-    //     }
-    //     // A链接的页面跳转
-    //     listenLick(){
-    //         window.addEventListener('click',(e) => {
-    //             let ev = e.target
-    //             if(ev.tagName === 'A' && ev.getAttribute('href')){
-    //                 e.preventDefault()
-    //                 // 更新url
-    //                 this.urlRefresh(ev.getAttribute('href'))
-    //             }
-    //         })
-    //     }
-    //     load(){
-    //         let path = location.pathname;
-    //     }
-    //     register(path,cb){
-    //         this.routers[path] = cb;
-    //     }
-    //     index(cb){
-    //         this.routers['/'] = cb
-    //     }
-    //     // 未找到
-    //     notFound(cb){
-    //         this.routers['notFound'] = cb
-    //     }
-    //     error(cb){
-    //         this.routers['error'] = cb
-    //     }
-    //     urlRefresh(path){
-    //         // 1.是一个合理的js对象
-    //         // 2.title,现在的浏览器都不需要
-    //         // 3. 一个url
-    //         history.pushState({path},null,path)
-    //         this.handler(path)
-    //     }
-    //     // 通用的回调函数
-    //     handler(path){
-    //         let cb ;
-    //         cb = this.routers[path]
-    //         cb.call(this)
-    //         // if(!this.routers.hasOwnP)
-    //     }
-    // }
-    // let router = new Router()
-    // router.load()
-    // let container = document.getElementById('container')
-    // router.register('/page1',() => {
-    //     container.innerHTML = 'page1'
-    // })
-    // router.register('/page2',() => {
-    //     container.innerHTML = 'page2'
-    // })
-    // router.register('/page3',() => {
-    //     container.innerHTML = 'page3'
-    // })
+    class Router {
+        constructor(){
+            this.routers = {}; 
+            this.listenPopState()
+            this.listenLick()
+        }
+        // 监听popState
+        listenPopState(){
+            window.addEventListener('popState',(e) => {
+                let state = e.state || {} ;
+                let path = state.path || '' ;
+                this.handler(path);
+            })
+        }
+        // A链接的页面跳转
+        listenLick(){
+            window.addEventListener('click',(e) => {
+                let ev = e.target
+                if(ev.tagName === 'A' && ev.getAttribute('href')){
+                    e.preventDefault()
+                    // 更新url
+                    console.log(ev.getAttribute('href'))
+                    this.urlRefresh(ev.getAttribute('href'))
+                }
+            })
+        }
+        load(){
+            let path = location.pathname;
+        }
+        register(path,cb){
+            this.routers[path] = cb;
+        }
+        index(cb){
+            this.routers['/'] = cb
+        }
+        // 未找到
+        notFound(cb){
+            this.routers['notFound'] = cb
+        }
+        error(cb){
+            this.routers['error'] = cb
+        }
+        urlRefresh(path){
+            // 1.是一个合理的js对象
+            // 2.title,现在的浏览器都不需要
+            // 3. 一个url
+            history.pushState({ page: 1 },'title',path)
+            this.handler(path)
+        }
+        // 通用的回调函数
+        handler(path){
+            let cb ;
+            cb = this.routers[path]
+            cb.call(this)
+            // if(!this.routers.hasOwnP)
+        }
+    }
+    let router = new Router()
+    router.load()
+    let container = document.getElementById('container')
+    router.register('/page1',() => {
+        container.innerHTML = 'page1'
+    })
+    router.register('/page2',() => {
+        container.innerHTML = 'page2'
+    })
+    router.register('/page3',() => {
+        container.innerHTML = 'page3'
+    })
 
     console.log(window.history)
     </script>
