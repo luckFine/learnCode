@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代理模式</title>
+</head>
+<body>
+    <script>
+// var myImage = (function () {
+//     var imgNode = document.createElement('img')
+//     document.body.appendChild(imgNode)
+//     console.log(imgNode)
+//     return function (src) {
+//             imgNode.src = src
+//         }
+// })()
+// var proxyImage = (function () {
+//     debugger
+//     var img = new Image;
+//     console.log(img)
+//     img.onload = function () {
+//         console.log(img)
+//         myImage(this.src)
+//     }
+    
+//     console.log('111')
+//     return function (src) {
+//             myImage('./loading.png')
+//             img.src = src
+//         }
+// })()
+// proxyImage('https://i5.jrjimg.cn/201411/21/itougu/itougu_14165388095791.jpg')
+
+var mult = function () {  
+    var a = 1
+    for(var i = 0 ; i < arguments.length ; i++){
+        a = a * arguments[i]
+    }
+    return a
+}
+var plus = function () {
+    var a = 1
+    for (var i = 0; i < arguments.length; i++) {
+        a = a + arguments[i]
+    }
+    return a
+}
+
+var createProxyFactory = function (fn) {
+    var cache = {}
+    console.log(fn)
+    return function () {
+        var args = Array.prototype.join.call(arguments, ',')
+        if (args in cache) {
+            return cache[args]
+        }
+        return cache[args] = fn.apply(this, arguments)
+    }
+}
+
+let proxyMult = createProxyFactory(mult)
+let proxyPlus = createProxyFactory(plus)
+
+console.log(proxyMult(1, 2, 3, 4))
+console.log(proxyPlus(1, 2, 3, 4))
+
+
+
+
+
+
+
+    // 参数fn：被柯里化的函数
+    // function curry(fn) {
+    //     // 记录fn的参数个数
+    //     let len = fn.length
+    //     return function temp(){
+    //         let args = [...arguments]
+    //         if(args.length >= len){
+    //             return fn(...args)
+    //         }else{
+    //             return function(){
+    //                 return temp(...args,...arguments)
+    //             }
+    //         }
+
+    //     }
+    // }
+    // function hh(a,b,c){
+    //     return a+b+c
+    // }
+    // let r = curry(hh)
+    // console.log(r(1)(2)(3))
+    </script>
+</body>
+</html>

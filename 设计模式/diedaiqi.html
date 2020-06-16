@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迭代器模式</title>
+</head>
+<body>
+    <script>
+        // jQuery里的迭代器
+        // $.each([1, 2, 3], function (i,n) {
+        //     console.log('当前下标为'+i)
+        //     console.log('当前值为'+i)
+        // })
+
+        // 实现自己的迭代器
+        // var each = function(ary,callback){
+        //     for(let i = 0 ; i < ary.length ; i ++){
+        //         // 把下标和元素当做参数传递给callback
+        //         callback.call(ary[i], i , ary[i]) 
+        //     }
+        // }
+        // each([1,2,3],function(i,n){
+        //     console.log(i,n)
+        // })
+
+        // var getUploadObj = function(){
+        //     try{
+        //         return new ActiveXObject('IE 上传控件')
+        //     }catch(e){
+        //         if(supportFlash()){
+        //             var str = '<object type="application/x-shockwave-flash"></object>'
+        //             return $(str).appendTo($('body'))
+        //         }else{
+        //             var str = '<input name="file" type="file" />'
+        //             return $(str).appendTo($('body'))
+        //         }
+        //     }
+        // }
+
+        // var getActiveUploadObj = function(){
+        //     try {
+        //         return new ActiveXObject('IE 上传控件')
+        //     } catch (e) {
+        //         return false
+        //     }
+        // }
+        // var getFlashUploadObj = function () {
+        //     if (supportFlash()) {
+        //         var str = '<object type="application/x-shockwave-flash"></object>'
+        //         return $(str).appendTo($('body'))
+        //     }
+        //     return false
+        // }
+        // var getFormUploadObj = function () {
+        //     var str = '<input name="file" type="file" />'
+        //     return $(str).appendTo($('body'))
+        // }
+
+        var iteratorUploadObj = function(){
+            for(var i = 0 ,fn; fn = arguments[i++];){
+                var uploadObj = fn()
+                if(uploadObj !== false){
+                    return uploadObj
+                }
+            }
+        }
+
+        var uploadObj = iteratorUploadObj(getActiveUploadObj, getFlashUploadObj, getFormUploadObj)
+    </script>
+</body>
+</html>

@@ -26,15 +26,38 @@
     // };
     // console.log(''+ -123)
     // console.log(reverse(-123))
-    function Person() { }
-    Person.prototype = {
-        name: 'tt',
-        age: 18
+    // function Person() { }
+    // Person.prototype = {
+    //     name: 'tt',
+    //     age: 18
+    // }
+    // // 实例化之前先修改Person的constructor指向
+    // Person.prototype.constructor = Person
+    // var person1 = new Person();
+    // console.log(person1.name)
+
+
+   
+    function bar() {
+        var myName = "极客世界"
+        let test1 = 100
+        if (1) {
+            let myName = "Chrome浏览器"
+            console.log(test)
+        }
     }
-    // 实例化之前先修改Person的constructor指向
-    Person.prototype.constructor = Person
-    var person1 = new Person();
-    console.log(person1.name)
+    function foo() {
+        var myName = "极客邦"
+        let test = 2
+        {
+            let test = 3
+            bar()
+        }
+    }
+    var myName = "极客时间"
+    let myAge = 10
+    let test = 1
+    foo() 
     </script>
 </body>
 </html>
