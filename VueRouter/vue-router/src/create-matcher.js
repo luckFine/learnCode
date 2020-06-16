@@ -19,7 +19,7 @@ export function createMatcher (
 ): Matcher {
   // 
   const { pathList, pathMap, nameMap } = createRouteMap(routes)
-
+  // 动态创建路由
   function addRoutes (routes) {
     createRouteMap(routes, pathList, pathMap, nameMap)
   }
@@ -29,6 +29,7 @@ export function createMatcher (
     currentRoute?: Route,
     redirectedFrom?: Location
   ): Route {
+    // 对当前路径进行计算
     const location = normalizeLocation(raw, currentRoute, false, router)
     const { name } = location
 

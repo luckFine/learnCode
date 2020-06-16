@@ -13,8 +13,10 @@ export function normalizeLocation (
   append: ?boolean,
   router: ?VueRouter
 ): Location {
+  // 如果raw是一个对象 就构造一个{ path: raw }的对象
   let next: Location = typeof raw === 'string' ? { path: raw } : raw
   // named target
+  // 已经被_normalized标记过的直接返回
   if (next._normalized) {
     return next
   } else if (next.name) {
@@ -26,7 +28,7 @@ export function normalizeLocation (
     return next
   }
 
-  // relative params
+  // relative params  处理参数
   if (!next.path && next.params && current) {
     next = extend({}, next)
     next._normalized = true
@@ -42,7 +44,7 @@ export function normalizeLocation (
     }
     return next
   }
-
+  // 解析路径
   const parsedPath = parsePath(next.path || '')
   const basePath = (current && current.path) || '/'
   const path = parsedPath.path
