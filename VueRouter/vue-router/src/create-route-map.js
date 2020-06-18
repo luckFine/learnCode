@@ -46,6 +46,7 @@ export function createRouteMap (
   })
 
   // ensure wildcard routes are always at the end
+  // 匹配通配符，把通配符放在结尾 调整优先级
   for (let i = 0, l = pathList.length; i < l; i++) {
     if (pathList[i] === '*') {
       pathList.push(pathList.splice(i, 1)[0])
@@ -101,7 +102,7 @@ function addRouteRecord (
   if (typeof route.caseSensitive === 'boolean') {
     pathToRegexpOptions.sensitive = route.caseSensitive
   }
-
+// 路由的匹配信息
   const record: RouteRecord = {
     path: normalizedPath,
     regex: compileRouteRegex(normalizedPath, pathToRegexpOptions),
@@ -120,7 +121,7 @@ function addRouteRecord (
           ? route.props
           : { default: route.props }
   }
-
+  // 当定义了二级路由的时候
   if (route.children) {
     // Warn if route is named, does not redirect and has a default child route.
     // If users navigate to this route by name, the default child will

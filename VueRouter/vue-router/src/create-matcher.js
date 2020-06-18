@@ -67,6 +67,7 @@ export function createMatcher (
     currentRoute?: Route,
     redirectedFrom?: Location
   ): Route {
+    // 对当前路径进行计算
     const location = normalizeLocation(raw, currentRoute, false, router)
     const { name } = location
 
