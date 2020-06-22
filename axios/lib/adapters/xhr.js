@@ -166,14 +166,14 @@ module.exports = function xhrAdapter(config) {
     if (typeof config.onUploadProgress === 'function' && request.upload) {
       request.upload.addEventListener('progress', config.onUploadProgress);
     }
-
+    // 如果配置了cancelToken
     if (config.cancelToken) {
-      // Handle cancellation
+      // 指定用于中断请求的回调函数
       config.cancelToken.promise.then(function onCanceled(cancel) {
         if (!request) {
           return;
         }
-
+        // 中断请求
         request.abort();
         reject(cancel);
         // Clean up request
@@ -185,7 +185,7 @@ module.exports = function xhrAdapter(config) {
       requestData = null;
     }
 
-    // Send the request
+    // 发送请求
     request.send(requestData);
   });
 };

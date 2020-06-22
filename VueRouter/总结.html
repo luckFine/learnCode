@@ -8,7 +8,6 @@
 <body>
     <script>
 
-
         // 1、vue编写插件的时候，通常提供静态的install方法
         // 2、Vue-Router的install方法会给每一个组件注入beforeCreated和destoryed钩子函数，在beforeCreated中做一些私有属性定义和路由初始化工作
 
@@ -21,6 +20,77 @@
 
         // 路由切换
         // 了解导航守卫，url变化，组件渲染
+
+
+
+
+        // vue-router源码分析
+        /*
+        install安装路由
+        vue编写插件的时候，通常提供静态的install方法，在调用 vue.use(Router) 的时候会找 Router 的 install 方法，并把组件实例传递到 install 方法的参数中。
+        在beforeCreated的时候，判断是都是根实例，如果是根实例，就把router的配置添加到_router上 执行_router的init方法 
+        */
+
+        // VueRouter对象
+        // 路由初始化的时机是在组件的初始化阶段，执行到beforeCreate钩子函数的时候会执行router.init方法，然后又会执行history.transitionTo方法做路由过渡
+        // transitionTo方法会执行match方法 match去执行matcher.match方法
+        // 属性和方法、初始化逻辑
+        /*
+        VueRouter = {
+            app : null
+            apps : []
+            options : options
+            beforeHooks : []
+            resolveHooks : []
+            afterHooks : []
+            matcher = createMatcher(options.routes || [], this)
+            fallback:boolean,
+            mode:''  history桌和
+            match : (){}
+            init : (){}
+            beforeEach : (){}
+            beforeResolve: (){}
+            afterEach : (){}
+            onReady : (){}
+            onError : (){}
+            push : (){}
+            replace : (){}
+            go : (){}
+            back : (){}
+            forward : (){}
+            getMatchedComponents : (){}
+            resolve : (){}
+            addRoutes : (){}
+        }
+        
+        History
+
+        History = {
+            router:router
+            base:
+            current:
+            pending : null
+            ready : false
+            readyCbs : []
+            readyErrorCbs : []
+            errorCbs : []
+            listen : (){}
+            onReady : (){}
+            onError : (){}
+            transitionTo ：(){}
+            confirmTransition : (){}
+            runQueue : (){}
+            updateRoute : (){}
+        }
+        
+        
+        */
+
+        // matcher 
+        // createMatcher的初始化逻辑  match的匹配过程
+        /*
+        
+        */
     </script>
 </body>
 </html>

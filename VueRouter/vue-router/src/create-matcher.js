@@ -203,7 +203,7 @@ export function createMatcher (
     }
     return createRoute(record, location, redirectedFrom, router)
   }
-
+  // createMatcher最后暴露的两个方法
   return {
     match,
     addRoutes

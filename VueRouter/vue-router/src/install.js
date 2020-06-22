@@ -33,6 +33,7 @@ export function install(Vue) {
         this._router = this.$options.router
         // 执行router的init函数
         this._router.init(this)
+        // _route设置成响应对象
         Vue.util.defineReactive(this, '_route', this._router.history.current)
       } else {
         // 在每一个组件都可以访问到根实例

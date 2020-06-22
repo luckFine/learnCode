@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Hello App!</h1>
+        <p>
+            <!-- 使用 router-link 组件来导航. -->
+            <!-- 通过传入 `to` 属性指定链接. -->
+            <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+            <router-link to="/foo">Go to Foo</router-link>
+            <router-link to="/bar">Go to Bar</router-link>
+        </p>
+        <!-- 路由出口 -->
+        <!-- 路由匹配到的组件将渲染在这里 -->
+        <router-view></router-view>
+    </div>
+    <script>
+
+    import Vue from 'vue'
+    import VueRouter from 'vue-router'
+    import App from './App'
+
+        Vue.use(VueRouter)
+
+        // 1. 定义（路由）组件。
+        // 可以从其他文件 import 进来
+        const Foo = { template: '<div>foo</div>' }
+        const Bar = { template: '<div>bar</div>' }
+
+        // 2. 定义路由
+        // 每个路由应该映射一个组件。 其中"component" 可以是
+        // 通过 Vue.extend() 创建的组件构造器，
+        // 或者，只是一个组件配置对象。
+        // 我们晚点再讨论嵌套路由。
+        const routes = [
+            { path: '/foo', component: Foo },
+            { path: '/bar', component: Bar }
+        ]
+
+        // 3. 创建 router 实例，然后传 `routes` 配置
+        // 你还可以传别的配置参数, 不过先这么简单着吧。
+        const router = new VueRouter({
+            routes // （缩写）相当于 routes: routes
+        })
+
+        // 4. 创建和挂载根实例。
+        // 记得要通过 router 配置参数注入路由，
+        // 从而让整个应用都有路由功能
+        const app = new Vue({
+            el: '#app',
+            render(h) {
+                return h(App)
+            },
+            router
+        })
+
+
+        /*
+        声明式导航： <router-link :to="...">
+        编程式导航：router.push(...)
+        当点击 <router-link> 时，这个方法会在内部调用router.push(...)，因而两个是等同关系的
+
+        声明式导航：<router-link :to="..." replace>
+        编程时导航：router.replace(location, onComplete?, onAbort?)
+
+        router.go()  这个方法的参数是一个整数，意思是在 history 记录中向前或者后退多少步，类似 window.history.go(n)；
+        */
+
+
+        /*
+        当用户点击 router-link 标签时，会去寻找它的 to 属性， 它的 to 属性和 js 中配置的路径{ path: '/home', component: Home}  path 一一对应，从而找到了匹配的组件， 最后把组件渲染到  标签所在的地方
+        前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。
+        目前实现这一功能的实现主要有2种
+
+        1.URL中的hash；
+        2.H5中history；
+
+        vueRouter的mode
+
+        'history': HTML5History;
+        'hash': HashHistory;
+        'abstract': AbstractHistory;
+        
+        1、在初始化对应的history之前，会对mode做一些校验：若浏览器不支持HTML5History方式(通过supportsPushState变量判断)，则mode设为hash;
+           若不是在浏览器环境下运行，则mode设为abstract;
+        2、VueRouter类中的onReady(),push()等方法只是一个代理，实际是调用的具体history对象的对应方法，
+           在init()方法中初始化时，也是根据history对象具体的类别执行不同操作
+
+        HashHistory  #模式
+
+        hash虽然出现在url中，但不会被包括在http请求中，它是用来指导浏览器动作的，对服务器端没影响，因此，改变hash不会重新加载页面。
+        hash的监听事件
+        window.addEventListener("hashchange",funcRef,false)
+
+
+
+        HTML5History
+        window.addEventListener("popstate",funcRef,false)
+  
+        window.history.pushState(stateObject,title,url)
+        window.history,replaceState(stateObject,title,url)
+
+        HashHistory.push()
+        $router.push() --> HashHistory.push() --> History.transitionTo() --> History.updateRoute() --> {app._route = route} --> vm.render()
+        */
+    </script>
+</body>
+</html>
