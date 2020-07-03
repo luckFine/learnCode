@@ -10,7 +10,7 @@ let forEach = (obj, callback) => {
 
 class Store{
     constructor(options) {
-        // 获取new实例时穿丝的所有属性
+        // 获取new实例时传递的所有属性
         console.log(options.state)
         this.vm = new Vue({
             data: {

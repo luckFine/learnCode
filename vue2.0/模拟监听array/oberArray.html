@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟监听数组</title>
+</head>
+<body>
+    <script>
+    const patchArray = (function () {
+        const methodsToPatch = [
+            'push',
+            'pop',
+            'shift',
+            'unshift',
+            'splice',
+            'reverse',
+            'sort'
+        ];
+        // 对象的两种属性：数据描述符 和 存取描述符  
+        //      对对象的监听用存取描述符 
+        //      对数组的监听用数据描述符 
+        //设置对象属性的工具方法
+        function def(obj, key, val) {
+            Object.defineProperty(obj, key, {
+                value: val,
+                enumerable: true, // 是否可枚举
+                writable: true,  // 当且仅当该属性的 writable 键值为 true 时，属性的值，也就是上面的 value，才能被赋值运算符改变
+                configurable: true // 是否可更改
+            });
+        }
+
+        const arrayProto = Array.prototype //缓存Array的原型
+        // console.log(arrayProto)
+        const arrayMethods = Object.create(arrayProto); //继承Array的原型
+        // console.log(arrayMethods)
+
+        methodsToPatch.forEach(function (method, index) {
+            def(arrayMethods, method, function (...args) {
+                // console.log('method', method);
+                //首先调用Array原型的方法
+                const res = arrayProto[method].apply(this, args);
+                //data中每个数组都有一个__ob__的私有属性指向创建的Observer实例（有兴趣看看源码中的observe方法，这里不详述）
+                // const ob = this.__ob__;
+                // console.log(ob)
+                let inserted = null;
+                //记录插入的值
+                switch (method) {
+                    case 'push':
+                    case 'unshift':
+                        inserted = args;
+                        break;
+                    case 'splice':
+                        inserted = args.slice(2);
+                        break;
+                }
+                // if (inserted) {
+                //     //如果是调用了push、unshift、splice，则尝试对新插入的值进行响应式绑定，因为插入的值有可能是对象(Object)或者数组(Array)
+                //     ob && ob.observeArray(inserted);
+                // }
+                console.log('数组发生改变了');
+                //向所有依赖发送通知，告诉它们数组的值发生变化了
+                // ob && ob.dep.notify();
+                return res;
+            });
+        });
+
+        return function (target) {
+            //看看浏览器支不支持__proto__这个属性，通过改变__proto__的值，可以设置对象的原型
+            console.log(target)
+            if ('__proto__' in {}) {
+                //将数组的原型指向arrayMethods，这样当数组调用上述的7个方法时，其实是调用arrayMethods中的方法而不是调用Array.prototype中的方法
+                target.__proto__ = arrayMethods;
+            } else {
+                //如果浏览器不支持__proto__，则设置数组对应的属性，这样当数组调用上述的7个方法时，其实是调用数组对应属性指向的方法
+                for (let i = 0, l = methodsToPatch.length; i < l; i++) {
+                    let key = methodsToPatch[i];
+                    def(target, key, arrayMethods[key]);
+                }
+            }
+        }
+    })();
+
+    //测试
+    // let arr = [1, 2, 3];
+    // patchArray(arr);
+    // arr.push(4);
+
+
+function delay(timer){
+    return new Promise((resolve,reject) =>{
+        setTimeout(() => {
+            resolve()
+        },timer)
+    })
+}
+
+async function timeDelay(){
+    console.log(1)
+    await delay(300)
+    console.log(5)
+}
+    timeDelay()
+    </script>
+</body>
+</html>

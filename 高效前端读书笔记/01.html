@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高效前端</title>
+</head>
+<style>
+    /* ul{
+        width: 200px;
+        display: flex;
+        justify-content: space-between
+    }
+    li:hover{
+        color: red;
+    } */
+    
+    input:checked + .checkbox{
+        width: 9px;
+        background: blueviolet;
+    }
+    .sanjiao{
+        width: 0;
+        height: 0;
+        border-top: none;
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom:  40px solid green;
+    }
+</style>
+<body>
+    <!-- <ul class="fathr">
+        <li>首页</li>
+        <li>直播</li>
+        <li>分享</li>
+    </ul> -->
+    <!-- <label for="">
+        <input type="checkbox">
+        <span class="checkbox">真的</span>
+    </label> -->
+    
+    <!-- <form id="register">
+        <input type="text" name="username">
+        <input type="password" name="password">
+    </form> -->
+
+
+    <div class="sanjiao">
+
+    </div>
+    <script>
+        /*
+        第一章：HTML 和 CSS
+        1、能用HTML/CSS解决的问题就不要用JS
+            鼠标移动变换样式：hover
+            原生的radio/checkout选中样式  :checked
+            多列等高： display:table
+        2、优化HTML标签
+            多使用语义标签
+            合理利用from 比如说获取form子元素  不需要多次获取dom 注意当name属性不存在时，获取value会报错
+                var from = document.getElementById('register')
+                console.log(from['username']，from['username'].value)
+        3、css画三角形
+        4、尽可能的使用伪元素
+            伪元素是一个元素的子元素、并且是inline行内元素，:before  :after ，但是js无法 获取这个元素，不能进行增删改查 伪元素不影响dom效率   
+            “伪元素适用于那种页面辅助性的视觉元素，如果内容本身是正常的页面内容，那还是用正常的标签吧。不能仅仅只是出于节省一个标签的目的，走向另一个极端，全部都用伪元素”
+
+
+        第二章 JS优化
+        1、减少前端代码耦合
+            避免全局耦合：模块化
+            HTML/CSS/JS耦合：在js中操作时 通过类去控制样式
+            出现了重复代码 - 封装成一个函数 - 封装成一个模块 - 封装成一个插件 
+                封装一个滚动条插件
+        */
+        function ProgressBar($container){
+            this.$container = $container; // 进度条外面的容器
+            this.$meter = null
+            this.$bar = null
+            this.$barFullWidth = $container.width()*0.9
+            this.show()
+        }
+        ProgressBar.prototype.setProgressBar = function(percentage,time){
+            time = typeof time === 'undefined' ? 100 : time
+            this.$meter.stop().animate({width: parseInt(this.$barFullWidth * percentage)}, time);
+        }
+    </script>
+</body>
+</html>

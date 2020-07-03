@@ -25,7 +25,7 @@ class ModuleCollection {
             this.root._children[path[path.length-1]] = rawModule
         }
         // 格式化子
-        if (rawModule.modules) {
+        if (rootModule.modules) {
             forEach(rootModule.modules, (moduleName, module) => {
                 // 将a模块进行注册[a],a模块的定义
                 // 将b模块进行注册[b],b模块的定义

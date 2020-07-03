@@ -5,47 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        div {
+        /* div {
     width: 0;
     height: 0;
     border-width: 0 40px 40px;
     border-style: solid;
     border-color: transparent transparent red;
+} */
+/* .father{
+    width: 200px;
+    height: 200px;
+    background: blue;
+    position: relative;
 }
+.child{
+    width: 100px;
+    height: 100px;
+    background: red;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    pointer-events: none;
+}
+.child p{
+    pointer-events: auto;
+} */
+    /* .outer{width: 200px;height: 100px;} */
+    .inner{width: 60px;height: 60px;padding-top: 20%;}
     </style>
 </head>
 <body>
-    <div></div>
+    <div class="father">
+        <!-- <div class="child">
+            <p>哈哈哈哈</p>
+        </div> -->
+    </div>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
     <script>
-    function deepCopy(obj1) {
-        var obj2 = Array.isArray(obj1) ? [] : {};
-        if (obj1 && typeof obj1 === "object") {
-            for (var i in obj1) {
-                var prop = obj1[i]; // 避免相互引用造成死循环，如obj1.a=obj
-                if (prop == obj1) {
-                    continue;
-                }
-                if (obj1.hasOwnProperty(i)) {
-                    // 如果子属性为引用数据类型，递归复制
-                    if (prop && typeof prop === "object") {
-                        obj2[i] = (prop.constructor === Array) ? [] : {};
-                        arguments.callee(prop, obj2[i]); // 递归调用
-                    } else {
-                        // 如果是基本数据类型，只是简单的复制
-                        obj2[i] = prop;
-                    }
-                }
-            }
-        }
-        return obj2;
-    }
-    var obj1 = {
-        a: 1,
-        b: 2,
-        c: {
-            d: 3
-        }
-    }
+        // document.body.addEventListener('mouseenter',function(e){
+        //     console.log(e.target)
+        // })
+    // function deepCopy(obj1) {
+    //     var obj2 = Array.isArray(obj1) ? [] : {};
+    //     if (obj1 && typeof obj1 === "object") {
+    //         for (var i in obj1) {
+    //             var prop = obj1[i]; // 避免相互引用造成死循环，如obj1.a=obj
+    //             if (prop == obj1) {
+    //                 continue;
+    //             }
+    //             if (obj1.hasOwnProperty(i)) {
+    //                 // 如果子属性为引用数据类型，递归复制
+    //                 if (prop && typeof prop === "object") {
+    //                     obj2[i] = (prop.constructor === Array) ? [] : {};
+    //                     arguments.callee(prop, obj2[i]); // 递归调用
+    //                 } else {
+    //                     // 如果是基本数据类型，只是简单的复制
+    //                     obj2[i] = prop;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return obj2;
+    // }
+    // var obj1 = {
+    //     a: 1,
+    //     b: 2,
+    //     c: {
+    //         d: 3
+    //     }
+    // }
     // var obj2 = deepCopy(obj1);
     // obj2.a = 3;
     // obj2.c.d = 4;
@@ -53,6 +83,325 @@
     // alert(obj2.a); // 3
     // alert(obj1.c.d); // 3
     // alert(obj2.c.d); // 4
+
+
+    // function A(a) {
+    //         this.a = a;
+    //     }
+    //     console.log(A.prototype)
+    //     console.log(A.prototype.__proto__)
+    //     console.log(Object.prototype)
+    function moreValue(arr) {
+            if (!arr) return false;
+            if (arr.length === 1) return 1;
+            let res = {}
+            let maxNum = 0;
+            let maxValue = null;
+            for (let i = 0; i < arr.length; i++) {
+                let val = arr[i]
+                res[val] === undefined ? res[val] = 1 : res[val]++;
+                if (res[val] > maxNum) {
+                    maxNum = res[val];
+                    maxValue = val
+                }
+            }
+            return maxValue + ',' + maxNum;
+        }
+    // function moreValue(arr) {
+    //         if (!arr) return false;
+    //         if (arr.length === 1) return 1;
+    //         let result = {}
+    //         // 先循环数组，把元素作为key值，元素出现的次数为value值，塞进result对象中
+    //         for (let i = 0; i < arr.length; i++) {
+    //             if (!result[arr[i]]) {
+    //                 result[arr[i]] = 1
+    //             } else {
+    //                 result[arr[i]]++
+    //             }
+    //         }
+
+    //         let keys = Object.keys(result)
+    //         let maxNum = 0,
+    //             maxVal = '';
+    //         // 循环对象，取出value值最大的对应的key值
+    //         for (let i = 0; i < keys.length; i++) {
+    //             if (result[keys[i]] > maxNum) {
+    //                 maxNum = result[keys[i]];
+    //                 maxVal = keys[i]
+    //             }
+    //         }
+    //         return maxVal + ',' + maxNum;
+    //     }
+
+        // console.log(moreLetter(arr)); // a,7
+        // console.log(moreValue(['a', 'a', 'a', 'a', 'a', 'b', 'n', 'a', 'a', 'a']))
+        // function fd(time,fn){
+        //     let timer
+        //     return function(){
+        //         if(timer){
+        //             clearTimeout(timer)
+        //             setTimeout(fn,time)
+        //         }else{
+        //             timer = setTimeout(fn, time)
+        //         }                
+        //     }
+
+        // }
+
+        // function jl(time,fn){
+        //     let flag = true
+        //     return function () { 
+        //         if(!flag){
+        //             true
+        //         }
+        //         flag = false
+        //         setTimeout((arguments) => {
+        //             fn.apply(this,arguments)   
+        //             flag = true
+        //         }, time);                
+        //      }
+        // }
+        // var a = []
+        // var b = {}
+        // var c = function(){}
+        // var d = {}
+        // d.__proto__ = a
+        // console.log(a instanceof Array) // true
+        // console.log(b instanceof Array) // false
+        // console.log(c instanceof Array) // false
+        // console.log(d instanceof Array) // true
+
+        // console.log(Array.prototype.isPrototypeOf(a)) // true
+        // console.log(Array.prototype.isPrototypeOf(b)) // false
+        // console.log(Array.prototype.isPrototypeOf(c)) // false
+        // console.log(Array.prototype.isPrototypeOf(d)) // true
+
+        // console.log(Object.prototype.toString.call(a) === '[object Array]') // true
+        // console.log(Object.prototype.toString.call(b) === '[object Array]') // fasle
+        // console.log(Object.prototype.toString.call(c) === '[object Array]') // false
+        // console.log(Object.prototype.toString.call(d) === '[object Array]') // false
+
+        // var a  = {
+        //     value:0,
+        //     valueOf(){
+        //         this.value++
+        //         return this.value;
+        //     }
+        // }
+        // console.log(a.value)
+        // console.log(a == 1 && a == 2);//true
+
+
+
+        // var sum = new Function('n1', 'n2', 'return "构造函数"');
+        
+        // var sum
+        // console.log(sum()) // 构造函数
+        // function sum(n1, n2) {
+        //     return '函数声明'
+        // }
+        // sum = function (n1, n2) {
+        //     return '函数字面量'
+        // }
+        // console.log(sum)
+        // console.log(sum()) // 函数字面量
+
+        // var cat = {
+        //     say() {
+        //         console.log("meow~");
+        //     },
+        //     jump() {
+        //         console.log("jump");
+        //     }
+        // }
+        // var tiger = Object.create(cat, {
+        //     say: {
+        //         writable: true,
+        //         configurable: true,
+        //         enumerable: true,
+        //         value: function () {
+        //             console.log("roar!");
+        //         }
+        //     }
+        // })
+        // var anotherCat = Object.create(cat);
+        // anotherCat.say(); // meow
+        // var anotherTiger = Object.create(tiger);
+        // anotherTiger.say(); // roar
+        // console.log(anotherTiger)
+    // 原型继承 
+    // function SuperType() {
+    //     this.colors = ["red", "blue", "green"];
+    // }
+    // function SubType() { }//即使没有写，也不会影响结果
+
+    // SubType.prototype = new SuperType();
+
+    // var example1 = new SubType();
+    // example1.colors.push("black");
+    // alert(example1.colors); //"red,blue,green,black"
+
+    // var example2 = new SubType();
+    // alert(example2.colors); //"red,blue,green,black"
+    
+
+    // 构造函数继承
+    // function Person(name, age) {
+    //     this.name = name,
+    //     this.age = age,
+    //     this.setName = function () { }
+    // }
+    // Person.prototype.setAge = function () { }
+    // function Student(name, age, price) {
+    //     Person.call(this, name, age)  
+    //     // 相当于: this.Person(name, age)
+    //     /*this.name = name
+    //     this.age = age*/
+    //     this.price = price
+    // }
+    // var s1 = new Student('Tom', 20, 15000)
+
+    // function Person(name, age) {
+    //     this.name = name,
+    //         this.age = age,
+    //         this.setAge = function () { }
+    // }
+    // Person.prototype.setAge = function () {
+    //     console.log("111")
+    // }
+    // function Student(name, age, price) {
+    //     Person.call(this, name, age)
+    //     this.price = price
+    //     this.setScore = function () { }
+    // }
+    // Student.prototype = Person.prototype
+    // Student.prototype.sayHello = function () { }
+    // var s1 = new Student('Tom', 20, 15000)
+    // console.log(s1.constructor)
+    // console.log(s1 instanceof Student, s1 instanceof Person)
+
+    // 寄生
+    // function object(obj) {
+    //     function F() { }
+    //     F.prototype = obj;
+    //     return new F();
+    // }
+    // // object是F实例的另一种表示方法
+    // var obj = object(Person.prototype);
+    // // obj实例（F实例）的原型继承了父类函数的原型// 上述更像是原型链继承，只不过只继承了原型属性
+    // // 组合
+    // function Sub() {
+    //     this.age = 100;
+    //     Person.call(this);
+    //     // 这个继承了父类构造函数的属性
+    // } // 解决了组合式两次调用构造函数属性的特点
+    // // 重点
+    // Sub.prototype = obj;
+    // console.log(Sub.prototype.constructor); // Person
+    // obj.constructor = Sub; // 一定要修复实例
+    // console.log(Sub.prototype.constructor); // Subvar
+    // sub1 = new Sub();// Sub实例就继承了构造函数属性，父类实例，object的函数属性
+    // console.log(sub1.job); // frontend
+    // console.log(sub1 instanceof Person); // true
+
+    // console.log(['1','3','10'].map(parseInt), parseInt('1',0), parseInt('3',1), parseInt('10',2))
+    // var num = 10
+    // function fn(){
+    //     console.log(this)
+    //     console.log(this.num) 
+    // }
+    // var obj = {
+    //     number:2,
+    //     show:function (fn){
+    //         this.number = 3
+    //         fn() // 10
+    //         arguments[0]() 
+    //     }
+    // }
+    // obj.show(fn)
+
+    
+    // async function a(){
+    //     var result = Promise.resolve()
+    //     result.about = function(){
+    //         console.log('XXXX')
+    //     }
+    //     return result
+    // }
+    // var  p = a()
+    // p.about()
+
+
+    // 冒泡 
+    // 1、比较相邻的元素，如果第一个元素比第二个大，就交换他们两个
+    // 2、对每一个相邻元素做同样的工作，从开始第一对到结尾最后一对，这步完成后，最后的元素会是最大的数
+    // 3、针对所有元素重复以上的不走，除了最后一个
+    // 4、持续每次对越来越少的元素重复上面的步骤，知道没有任何一对数字需要比较
+    function bubbleSort(arr) {
+        const len = arr.length;
+        for (let i = 0; i < len - 1; i++) {
+            for (let j = 0; j < len - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // let temp = arr[j + 1];
+                    // arr[j + 1] = arr[j];
+                    // arr[j] = temp;
+                    // es6的数组交换
+                    [arr[j],arr[j + 1]] = [arr[j+1], arr[j]]
+                }
+            }
+        }
+        return arr;
+    }
+    // console.log(bubbleSort([10, 3, 5, 77, 34, 23, 44]))
+
+    // 插入排序
+    // 1.将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。
+    // 2.从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）
+    function insertionSort(arr) {
+        var len = arr.length;
+        var preIndex, current;
+        for (var i = 1; i < len; i++) {
+            preIndex = i - 1;
+            current = arr[i];
+            console.log(preIndex, arr[preIndex], current)
+            // 0 10 3
+            // 1 10 5
+            // 2 10 77
+            // 3 77 34
+            // 4 77 23
+            // 5 77 44
+            while (preIndex >= 0 && arr[preIndex] > current) {
+                arr[preIndex + 1] = arr[preIndex];
+                preIndex--;
+            }
+            arr[preIndex + 1] = current;
+        }
+        return arr;
+    }
+    // console.log(insertionSort([10, 3, 5, 77, 34, 23, 44]))
+    // 1.首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置
+    // 2.再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。
+    // 3.重复第二步，直到所有元素均排序完毕。
+    // 选择排序
+    function selectionSort(arr) {
+        const len = arr.length;
+        let minIndex, temp;
+        for (let i = 0; i < len - 1; i++) {
+            minIndex = i;
+            for (let j = i + 1; j < len; j++) {
+                console.log(j)
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
+            // temp = arr[i];
+            // arr[i] = arr[minIndex];
+            // arr[minIndex] = temp;
+        }
+        return arr;
+    }
+    console.log(selectionSort([10, 3, 5, 77, 34, 23, 44]))
     </script>
 </body>
 </html>
