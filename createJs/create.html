@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body onload="init()">
+    <canvas id="demoCanvas" width="1000" height="800"></canvas>
+    <script src="http://cdn.bootcss.com/EaselJS/0.8.0/easeljs.min.js" charset="utf-8"></script>
+    <script>
+        var stage
+        function init() {
+            stage = new createjs.Stage("demoCanvas"); 
+            createjs.Ticker.addEventListener('tick',handleTick);
+            createjs.Ticker.setFPS(60)
+            start()
+        }
+        function handleTick(){
+            stage.update()
+        }
+        function start(){
+            drawButterfly()
+        }
+        function drawButterfly(){
+            var imgPath = './img.png'
+            butterfly1 = new createjs.Bitmap(imgPath)
+            // butterfly2 = new createjs.Bitmap(imgPath)
+            // butterfly3 = new createjs.Bitmap(imgPath)
+            // butterfly2.x=50;
+            // butterfly2.y=50;
+            stage.addChild(butterfly1)
+            stage.update()
+            // setTimeout(moveButterfly,1000)
+            setInterval(moveButterfly, 100);
+        }
+        function moveButterfly(){
+            // butterfly2.y += 200
+            // butterfly1.x +=1
+            butterfly1.scaleX = 2
+            butterfly1.scaleX = 0.5
+            // stage.swapChildren(butterfly2,butterfly1)
+        }
+      </script>
+</body>
+</html>

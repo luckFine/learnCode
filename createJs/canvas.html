@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body >
+    <!-- <canvas id="demoCanvas" width="500" height="300"></canvas> -->
+    <canvas id="canvas" width="700" height="400" style="border: black 1px solid"></canvas>
+    <!-- <script src="http://cdn.bootcss.com/EaselJS/0.8.0/easeljs.min.js" charset="utf-8"></script> -->
+    <!-- <script>
+        function init() {
+            // 创建舞台
+            var stage = new createjs.Stage("demoCanvas"); 
+            // 创建一个形状
+            var circle = new createjs.Shape();
+            circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+            circle.x = 100;
+            circle.y = 100;
+            // 将形状添加到舞台
+            stage.addChild(circle);
+            // 更新舞台
+            stage.update();
+        }
+      </script> -->
+    <script>
+        var c = document.getElementById('canvas')
+        var ctx = c.getContext('2d')
+        var butterfly = new Image()
+            butterfly.src='./img.png'
+            butterfly.onload = drawButterfly
+        function drawButterfly(){
+            ctx.drawImage(butterfly,0,0,200,138,0,0,200,138)
+            ctx.drawImage(butterfly,0,0,200,138,200,0,200,138)
+            ctx.drawImage(butterfly,0,0,200,138,400,0,200,138)
+            setTimeout(moveButterfly,100)
+        }
+        function moveButterfly(){
+            ctx.clearRect(0,0,c.width,c.height)
+            ctx.drawImage(butterfly,0,0,200,138,0,0,200,138)
+            ctx.drawImage(butterfly,0,0,200,138,200,200,200,138)
+            ctx.drawImage(butterfly,0,0,200,138,400,0,200,138)
+        }
+    </script>
+</body>
+</html>

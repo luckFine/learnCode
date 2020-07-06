@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .galaxy {
+            width: 1300px;
+            height: 1300px;
+            position: relative;
+            background: blue;
+        }
+
+        .sun {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 600px;
+            left: 600px;
+            border-radius: 50%;
+        }
+
+        .mercury {
+            width: 50px;
+            height: 50px;
+            left: 700px;
+            top: 625px;
+            transform-origin: -50px 25px;
+            position: absolute;
+            animation: rotation 2.4s linear infinite;
+            background: chartreuse;
+            border-radius: 50%;
+        }
+
+        @keyframes rotation {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="galaxy">
+        <div class='sun'></div>
+        <div class='mercury'></div>
+        <div class='venus'></div>
+        <div class='earth'></div>
+    </div>
+</body>
+
+</html>

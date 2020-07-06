@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <canvas id="gameView" width="800" height="400" style="background: blanchedalmond"></canvas>
+    </div>
+    
+    <script src="http://cdn.bootcss.com/EaselJS/0.8.0/easeljs.min.js" charset="utf-8"></script>
+    <script>
+        var stage = new createjs.Stage('gameView')
+        var gameView = new createjs.Container()
+        stage.addChild(gameView)
+
+        createjs.Ticker.addEventListener('tick',stage);
+        createjs.Ticker.setFPS(30)
+
+        function startGame(){
+            getCanvasSize();
+            n = 2;
+            addRect()
+        }
+
+        function addRect(){
+            var c1 = parseInt(Math.random()*1000000)
+            var color = ('#'+c1)
+            var x = parseInt(Math.random()*n)
+            var y = parseInt(Math.random()*n)
+            for(var indexX = 0;indexX < n ;indexX++){
+                for(var indexY = 0;indexY < n; indexY++){
+                    var c2 = parseInt(c1-10*(n-indexY));
+                    var RectColor = ('#'+c2);
+                    var r = new Rect(n,color,RectColor)
+                    gameView.addChild(r)
+                    r.x = indexX;
+                    r.y = indexY;
+                    if(r.x == x && r.y == y){
+                        r.setRectType(2)
+                    }
+                    r.x = indexX*(getSize()/n)
+                    r.y = indexY*(getSize()/n)
+                    if(r.getRectType() == 2){
+                        r.addEventListener('click',clickRect)
+                    }
+                }
+            }
+        }
+
+        function clickRect(){
+            if(n<20){
+                ++n;
+            }
+            gameView.removeAllChildren();
+            addRect();
+        }
+
+        function getCanvasSize(){
+            var gView = document.getElementById('gameView')
+            gView.height = window.innerHeight - 4;
+            gView.width = window.innerWidth - 4;
+        }
+
+        function getSize(){
+            if(window.innerHeight >= window.innerWidth){
+                return window.innerWidth
+            }else{
+                return window.innerHeight
+            }
+        }
+
+        function Rect(n,color,RectColor){
+            createjs.Shape.call(this)    
+            this.setRectType = function(type){
+                this._RectType = type;
+                switch(type){
+                    case 1:
+                        this.setColor(color);
+                        break;
+                    case 2:
+                        this.setColor(RectColor)
+                        break;
+                }
+            } 
+            this.setColor = function(colorString){
+                this.graphics.beginFill(colorString);
+                this.graphics.drawRect(0,0,getSize()/n-2,getSize()/n-2)
+                this.graphics.endFill()
+            }
+            this.getRectType = function(){
+                return this._RectType
+            }
+            this.setRectType(1)
+        }
+        Rect.prototype = new createjs.Shape()
+
+        startGame()
+
+        
+    </script>
+</body>
+</html>

@@ -71,19 +71,79 @@
             避免全局耦合：模块化
             HTML/CSS/JS耦合：在js中操作时 通过类去控制样式
             出现了重复代码 - 封装成一个函数 - 封装成一个模块 - 封装成一个插件 
-                封装一个滚动条插件
+                    封装一个滚动条插件 
+                        function ProgressBar($container){
+                            this.$container = $container; // 进度条外面的容器
+                            this.$meter = null
+                            this.$bar = null
+                            this.$barFullWidth = $container.width()*0.9
+                            this.show()
+                        }
+                        ProgressBar.prototype.setProgressBar = function(percentage,time){
+                            time = typeof time === 'undefined' ? 100 : time
+                            this.$meter.stop().animate({width: parseInt(this.$barFullWidth * percentage)}, time);
+                        }
+        2、策略模式
+        3、访问者模式
+        6、JS书写优化：
+            1、按强类型风格写代码
+                1、定义变量的时候指明类型
+                2、不随意改变变量的类型
+                3、函数返回的类型值应该是确定的
+                    function getPrice(count){
+                        if(count < 0) return "";  // 返回空字符串
+                        else return count * 100;  // 返回数值
+                    }
+            2、减少作用域查找
+                1、减少全局作用域:查找快，不污染window
+                2、不滥用闭包
+                3、避免使用==
+                    a.确定变量类型就不需要使用==
+                    b.类型不确定，应该手动类型转换
+                    c.ESlint检查不通过
+                    d.奇怪现象
+                        null == undefined                       //true
+                        '' == '0'                               //false
+                        0  == ''                                //true
+                        0  == '0'                               //true
+                        ' \t\r\n ' == 0                         //true
+                        new String("abc") == "abc"              //true
+                        new Boolean(true) == true               //true
+                        true == 1                               //true
+            3、合并表达式（简化代码）
+                1、三目运算符取代if-else
+                2、使用连等   连等利用赋值运算符返回所赋的值 并且执行顺序是从右向左的
+                3、自增 
+                4、减少魔数  未知变量可使用语义命名
+            4、使用ES6的语法，简化代码
+                1、箭头函数取代小函数
+                2、使用es6的class
+                    虽然使用es6的class和使用function的prototype本质上是一样的，都是用的原型，但是用class可以减少代码量
+                    同时让代码看起来更加高级
+                3、字符串拼接 
+                4、块级作用域变量
+
+
+        第三章 页面优化
+            1、避免页面卡顿
+                电脑屏幕的帧率fps是60Hz 60Hz就是要求1帧的事件为1s/60=16.67ms 
+                浏览器显示页面的时候，要处理js逻辑，还要渲染，每个执行片段不能超过16.7ms。实际上，浏览器内核自身支撑体系运行也需要消耗一些
+                事件，所以留给我们的差不多只有10ms，这10ms里我们需要走一步渲染流程：JavaScript-Style-Layout-Paint-Composite
+                首先你用JS做了些逻辑，还触发了样式变化，style把应用的样式规则计算好之后，把影响到的页面元素进行重新布局（叫作layout），
+                再把它画到内存的一个画布里面，paint成了像素，最后把这个画布刷新到屏幕上去，叫作composite，形成一帧。
+                这其中的任何一项如果执行时间太长，就会导致渲染这一帧的时间过长，平均帧率就会下降。假设这一帧花了50ms，那么此时的帧率就为1s/50ms=20fps.
+                当然上面的过程并不一定每一步都会执行，例如：
+                ·你的JS只是做一些运算，并没有增删DOM或改变CSS，那么后续几步就不会执行；
+                ·style只改了color/background-color等不需要重新layout的属性，则不用执行layout这一步；
+                ·style改了transform属性，在blink和edge浏览器里面不需要layout和paint，”
+                    其他优化方法：
+                        减少layout 
+                        简化dom结构
+                用Chrome分析页面加载  Chrome开发者文档
+            2、加快页面打开速度
+                两个指标
+                    ready 时间  load时间
         */
-        function ProgressBar($container){
-            this.$container = $container; // 进度条外面的容器
-            this.$meter = null
-            this.$bar = null
-            this.$barFullWidth = $container.width()*0.9
-            this.show()
-        }
-        ProgressBar.prototype.setProgressBar = function(percentage,time){
-            time = typeof time === 'undefined' ? 100 : time
-            this.$meter.stop().animate({width: parseInt(this.$barFullWidth * percentage)}, time);
-        }
     </script>
 </body>
 </html>

@@ -1,0 +1,84 @@
+# import matplotlib
+
+# import matplotlib.pyplot as plt
+# squares = [1, 4, 9, 16, 25]
+# plt.plot(squares)
+# plt.show()
+
+# import matplotlib.pyplot as plt
+# from random import choice
+#
+# class RandomWalk():
+#     def __init__(self, num_points=5000):
+#         self.num_points = num_points
+#         self.x_values = [0]
+#         self.y_values = [0]
+#     def fill_walk(self):
+#         while len(self.x_values) < self.num_points:
+#             x_direction = choice([1, -1])
+#             x_distance = choice([0, 1, 2, 3, 4])
+#             x_step = x_direction * x_distance
+#             y_direction = choice([1, -1])
+#             y_distance = choice([0, 1, 2, 3, 4])
+#             y_step = y_direction * y_distance
+#             # 拒绝原地踏步
+#             if x_step == 0 and y_step == 0:
+#                 continue
+#             # 计算下一个点的x和y值
+#             next_x = self.x_values[-1] + x_step
+#             next_y = self.y_values[-1] + y_step
+#             self.x_values.append(next_x)
+#             self.y_values.append(next_y)
+#
+# # 创建一个RandomWalk实例，并将其包含的点都绘制出来 ❶ rw = RandomWalk()
+# rw = RandomWalk()
+# rw.fill_walk()
+# plt.scatter(rw.x_values, rw.y_values, s=15)
+# plt.show()
+
+
+
+from random import randint
+
+class Die():
+    """表示一个骰子的类"""
+    def __init__(self, num_sides=6):
+        """骰子默认为6面"""
+        self.num_sides = num_sides
+    def roll(self):
+        """"返回一个位于1和骰子面数之间的随机值"""
+        return randint(1, self.num_sides)
+
+die = Die()
+# 掷几次骰子，并将结果存储在一个列表中
+results = []
+for roll_num in range(100):
+    result = die.roll()
+    results.append(result)
+    # print(results)
+
+# 分析结果
+# frequencies = []
+# for value in range(1, die.num_sides+1):
+#     frequency = results.count(value)
+#     frequencies.append(frequency)
+
+# print(frequencies)
+
+# 绘制直方图
+
+import pygal
+
+frequencies = []
+for value in range(1, die.num_sides+1):
+    frequency = results.count(value)
+    frequencies.append(frequency)
+
+# 对结果进行可视化
+hist = pygal.Bar()
+hist.title = "Results of rolling one D6 1000 times."
+hist.x_labels = ['1', '2', '3', '4', '5', '6']
+hist.x_title = "Result"
+hist.y_title = "Frequency of Result"
+hist.add('D6', frequencies)
+hist.render_to_file('die_visual.svg')

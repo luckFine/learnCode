@@ -7,9 +7,9 @@ let forEach = (obj, callback) => {
 class ModuleCollection {
     constructor(options) {
         // 深度遍历，将所有的子模块都遍历一遍
-        this.register([],options)
+        this.register([], options)
     }
-    register(path,rootModule) {
+    register(path, rootModule) {
         let rawModule = {
             _raw: rootModule,
             state: rootModule.state,
@@ -21,8 +21,8 @@ class ModuleCollection {
         } else {
             path.slice(0, -1).reduce((root, current) => {
                 return root._children[current]
-            },this.root)
-            this.root._children[path[path.length-1]] = rawModule
+            }, this.root)
+            this.root._children[path[path.length - 1]] = rawModule
         }
         // 格式化子
         if (rootModule.modules) {
@@ -30,7 +30,7 @@ class ModuleCollection {
                 // 将a模块进行注册[a],a模块的定义
                 // 将b模块进行注册[b],b模块的定义
                 // 将c模块进行注册[b,c],c模块的定义
-                this.register(path.concat(moduleName),module)
+                this.register(path.concat(moduleName), module)
             })
         }
     }
@@ -50,28 +50,28 @@ class Store {
         this.mutations = {}
         this.actions = {}
         // 需要将用户传入的数据进行格式化操作
-        let root = {
-            _raw: rootModule,
-            state: rootModule.state,
-            _children: {
-                a: {
-                    _raw: rootModule,
-                    state: aModule.state,
-                    _children:{}
-                },
-                b: {
-                    _raw: rootModule,
-                    state: bModule.state,
-                    _children: {
-                        c: {
-                            _raw: rootModule,
-                            state: cModule.state,
-                            _children: {}
-                        }
-                    }
-                }
-            }
-        }
+        // let root = {
+        //     _raw: rootModule,
+        //     state: rootModule.state,
+        //     _children: {
+        //         a: {
+        //             _raw: rootModule,
+        //             state: aModule.state,
+        //             _children:{}
+        //         },
+        //         b: {
+        //             _raw: rootModule,
+        //             state: bModule.state,
+        //             _children: {
+        //                 c: {
+        //                     _raw: rootModule,
+        //                     state: cModule.state,
+        //                     _children: {}
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         this.modules = new ModuleCollection(options)
 
     }

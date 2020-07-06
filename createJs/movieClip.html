@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="gameView" width="800" height="400" style="background: blanchedalmond"></canvas>
+    <!-- <script src="http://cdn.bootcss.com/EaselJS/0.8.0/easeljs.min.js" charset="utf-8"></script> -->
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script>
+    var stage = new createjs.Stage("gameView");
+    createjs.Ticker.addEventListener("tick", stage);
+
+    var mc = new createjs.MovieClip(null, 0, true, {start:20});
+    stage.addChild(mc);
+
+    var child1 = new createjs.Shape(
+        new createjs.Graphics().beginFill("#999999")
+            .drawCircle(30,30,30));
+    var child2 = new createjs.Shape(
+        new createjs.Graphics().beginFill("#5a9cfb")
+            .drawCircle(30,30,30));
+
+    mc.timeline.addTween(
+        createjs.Tween.get(child1)
+            .to({x:0}).to({x:160}, 100).to({x:0}, 100));
+    mc.timeline.addTween(
+        createjs.Tween.get(child2)
+            .to({x:160}).to({x:0}, 100).to({x:160}, 100));
+
+    mc.gotoAndPlay("start");   
+    </script>
+</body>
+</html>
