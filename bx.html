@@ -5,47 +5,159 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .area {
-      border: 2px ridge;
+    body{
+      font-size: 30vm;
     }
-  
-    .box {
-      background-color: rgba(106, 24, 238, 0.26);
-      height: 5em;
-      margin: 1em;
-      width: 5em;
+    .left{
+      width: 100px;
+      height: 1000px;
+      background: green;
+      float: left;
     }
+    .right{
+      width: 100px;
+      height: 1000px;
+      background: green;
+      float: right;
+    }
+    /* 第一种 */
+    /* .middle{
+      height: 1000px;
+      margin: 0 100px;
+      background: red
+    } */
+    /* 第二种 */
+    /* .middle{
+      width: 100000px;
+      height: 1000px;
+      display: table-cell;
+      background: red
+    }
+    .flex{
+      display: flex;
+    }
+    .w100{
+      width: 100px;
+      background: green;
+    }
+    i{
+      margin: 20px 20px;
+      padding: 80px 20px;
+      background: blueviolet;
+    }
+    p{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: blueviolet;
+      line-height: 50px;
+      text-align: center;
+      transform: skew(30deg)
+    } */
+    /* .parent {
+      width: 80px;
+    }
+    .child {
+      height: 0;
+      padding-bottom: 50%;
+      position: relative;
+    }
+    .content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: pink;
+    } */
+
+  #container{
+    width: 100vmin;
+    height: 100vmin;
+    background: pink;
+  }
+
+  .attr {
+    width: 50%;
+    height: 50%;
+    background-color: orange;
+  }
+  /* .father{
+    width: 200px;
+    height: 200px;
+  } */
+  .ulFather{
+    display: flex;
+    background: darkmagenta;
+  }
+  li{
+    width: 100px;
+    height: 50px;
+    background: blue;
+  }
   </style>
 </head>
 <body>
-  <div class="area">
-    <div class="box rAF"></div>
-  </div> <br>
-  <!-- <script>        
-    function setNewArea() { 
-      let el = document.createElement('div')            
-      el.setAttribute('class', 'area')            
-      el.innerHTML = '<div class="box rAF"></div>'            
-      document.body.append(el) } setNewArea()       
-    </script> -->
-    <script>
-      class yideng {
-        static str = '999';
-        say = () => {
-          throw new Error('error')
-        }
-      }
-      class S extends yideng{
-        constructor(){
-          super()
-        }
-        say () {
-          console.log('S.str')
-        }
-      }
-      const y = new S()
-      console.log(yideng.str)
-      console.log(y.say())
-    </script>
+  <!-- <input type="file" id="fileData">选择文件 -->
+  <!-- <div class="left"></div>
+  <div class="right"></div>
+  <div class="middle">中间元素</div> -->
+  <!-- 第三种 -->
+  <!-- <div class="flex">
+    <div class="w100">left</div>
+    <div style="flex-grow:1;background: hotpink;">middle</div>
+    <div class="w100">right</div>
+  </div> -->
+  <!-- <i>1</i><i>2</i> -->
+<!-- 
+    <div class="parent">
+      <div class="child">
+        <div class="content">
+          sijiwoqjioiojio sijiwoqjioiojiosijiwoqjioiojiosijiwoqjioiojiosijiwoqjioiojiosijiwoqjioiojiosijiwoqjioiojio
+        </div>
+      </div>
+    </div> -->
+
+    
+    <!-- <div id="container">
+      <div class="attr"></div>
+    </div>       -->
+
+    
+    <ul class="ulFather">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+
+  <script src="./jquery/jquery.js"></script>
+  <script>
+    // $('#fileData').on('change',function(){
+    //   const fromData = new FormData()
+    //   console.log(fromData)
+    //   const files = new FileReader()
+    //   console.log(files)
+    //   console.log(this.files)
+    // })
+
+      $.ajax({
+          type: 'get',
+          url: 'http://127.0.0.1:3000/',
+          dataType: 'json',
+          // headers: {
+          //   'Content-Type': 'application/json'
+          // },
+          success: function (res) {
+            console.log(res)
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        })
+
+
+  </script>
 </body>
 </html>
