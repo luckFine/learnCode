@@ -168,12 +168,88 @@
 
 // 
 
-let obj = {
-    name:'luck'
-}
-const { age } = obj
+// let obj = {
+//     name:'luck'
+// }
+// const { age } = obj
 
-console.log(age,obj)
+// console.log(age,obj)
+
+    var arr = [2, 12, 5, 3, 78, 46, 96, 67, 23]
+    // function bubbleSort(arr) {
+    //     for (var i = 0; i < arr.length - 1; i++) {
+    //         for (var j = 0; j < arr.length - 1 - i; j++) {
+    //             if (arr[j] >= arr[j + 1]) {
+    //                 [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+    //             }
+    //         }
+    //     }
+
+    //     return arr;
+    // }
+    // console.log(bubbleSort(arr)) 
+    // function selectionSort(arr){
+    //     let min 
+    //     let temp
+    //     for (let j = 0; j < arr.length - 1; j++) {
+    //         min = j;
+    //         // 应该把最小值和j进行交换
+    //         for(let i = j + 1; i < arr.length-1 ; i++){
+    //             if(arr[min] > arr[i]){
+    //                 min = i
+    //                 temp = arr[j]
+    //                 arr[j] = arr[i]
+    //                 arr[i] = temp
+    //             }
+    //         }    
+    //     }
+    //     return arr
+    // }
+    // console.log(selectionSort(arr))
+
+    // function insertionSort(array) {
+    //     // 获取数组的长度
+    //     var length = array.length
+
+    //     for(let i = 1 ; i < length ; i++){
+    //         let temp = array[i]
+    //         let j = i
+    //         while (arr[j-1] >= temp && j > 0) {
+    //             arr[j] = array[j-1]
+    //             j--
+    //         }
+    //         arr[j] = temp
+    //     }
+    //     return array;
+    // }
+    // console.log(insertionSort(arr)) 
+
+    function shellSort(array) {
+        //1.获取数组的长度
+        let length = array.length
+        //2.初始化增量
+        let gap = Math.floor(length / 2)
+        //3.第一层循环：while循环(使gap不断减小)
+        while (gap >= 1) {
+            //4.第二层循环：以gap为增量，进行分组，对分组进行插入排序
+            //重点为：将index = gap作为选中的第一个数据
+            for (let i = gap; i < length; i = i+gap) {
+                let temp = array[i]
+                let j = i
+                //5.第三层循环:寻找正确的插入位置
+                while (array[j - gap] > temp && j > gap - 1) {
+                    array[j] = array[j - gap]
+                    j -= gap
+                }
+                //6.将j位置的元素设置为temp
+                array[j] = temp
+            }
+            gap = Math.floor(gap / 2)
+        }
+        return array
+    }
+        console.log(arr)
+        console.log(shellSort(arr))
 </script>
 </body>
 </html>
