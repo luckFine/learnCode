@@ -359,15 +359,3 @@ const main = async function (ctx) {
 app.use(koaBody());
 app.use(main);
 app.listen(3000);
-
-
-
-
-
-
-
-
-
-
-
-
