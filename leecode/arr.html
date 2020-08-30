@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var heightChecker = function (heights) {
+            let arr = new Array(...heights)
+            arr = arr.sort(function(a,b){
+                return a-b
+            })
+            console.log(arr)
+            let num = 0
+            for (let i = 0; i <= heights.length; i++) {
+                if (heights[i] != arr[i]) {
+                    num++
+                }
+            }
+            return num
+        };
+        // console.log(heightChecker([10, 6, 6, 10, 10, 9, 8, 8, 3, 3, 8, 2, 1, 5, 1, 9, 5, 2, 7, 4, 7, 7]))
+
+
+        var twoSum = function (nums, target) {
+                for (let i = 0; i < nums.length; i++) {
+                    const n = target - nums[i]
+                    const m = nums.indexOf(n)
+                    if (n >= 0) {
+                        if (m > -1 && i != m){
+                            return [i, m]
+                        }
+                    }
+                }
+        }
+        // twoSum([2, 7, 11, 15],9)    
+
+        var removeDuplicates = function (nums) {
+            let left = 0
+            let right = 1
+            while (right <= nums.length) {
+                if (nums[left] === nums[right]) {
+                    right++
+                } else {
+                    nums[left + 1] = nums[right]
+                    left++
+                    right++
+                }                
+            }
+
+            return nums
+        };
+        console.log(removeDuplicates([1, 1, 2]))
+    </script>
+</body>
+</html>
