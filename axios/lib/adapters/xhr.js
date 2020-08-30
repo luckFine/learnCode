@@ -70,14 +70,14 @@ module.exports = function xhrAdapter(config) {
         config: config,
         request: request
       };
-
+      // 根据响应状态码来确定请求的promise的结果状态(成功或失败)
       settle(resolve, reject, response);
 
-      // Clean up request
+      // 将请求对象赋值为空
       request = null;
     };
 
-    // Handle browser request cancellation (as opposed to a manual cancellation)
+    // 绑定请求中断监听
     request.onabort = function handleAbort() {
       if (!request) {
         return;
