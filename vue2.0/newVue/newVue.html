@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div id="app">
-        <p>{{name}}</p>
-        <p k-text="name"></p>
+        <p>{{person.name}}</p>
+        <p v-text="name"></p>
+        <p v-text="person.name"></p>
         <p>{{age}}</p>
-        <p>{{doubleAge}}</p>
-        <button @click="changeName">按钮</button>
+        <p>{{solgon}}</p>
+        <input v-model='solgon'>
+        <!-- <p>{{doubleAåge}}</p> -->
+        <button v-on:click="changeName">按钮1</button>
+        <button @click="changeName">按钮2</button>
         <div v-html="html"></div>
     </div>
     <script src="./compile.js"></script>
-    <script src="./newVue.html"></script>
+    <script src="./observe.js"></script>
+    <script src="./newVue.js"></script>
     <script>
         const app = new NewVue({
-                el: '#app',
-                data: {
-                    name: 'test',
-                    age:12,
-                    html:'<button @click="changeName">999按钮</button>'
+            el: '#app',
+            data: {
+                solgon: '好好学习，天天向上',
+                person: {
+                    name: 'luck',
+                    age: '18'
                 },
-                created () {
-                    setTimeout(() => {
-                        this.name = '我是测试'
-                    },1500)
-                },
-                methods: {
-                    changeName(){
-                        this.name = 'hello,luck',
-                        this.age = 18
-                    }
+                name: 'test',
+                age: 12,
+                html: '<button @click="changeName">999按钮</button>'
+            },
+            created() {
+                setTimeout(() => {
+                    this.name = '我是测试'
+                }, 1500)
+            },
+            methods: {
+                changeName() {
+                    this.$data.html = '<h1>hello,luck</h1>'
+                    this.age = 18
+                    // consoles.log(this)
                 }
-            })
+            }
+        })
 
     </script>
 </body>
+
 </html>
