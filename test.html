@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function once(func) {
+        //     let done = false
+        //     return function () {
+        //         if (!done) {
+        //             done = true
+        //             func.apply(this, arguments)
+        //         }
+        //     }
+        // }
+        // const pay = once((money) => {
+        //     console.log(money)
+        // })
+        // pay(20)
+        // pay(20)
+        // 函数组合演示
+        function reverse(array) {
+            return array.reverse()
+        }
+        function first(array) {
+            return array[0]
+        }
+        function compose(f, g) {
+            return function (value) {
+                return f(g(value))
+            }
+        }
+        const last = compose(first, reverse)
+        console.log(last([1, 2, 3, 4]))
+    </script>
+</body>
+
+</html>

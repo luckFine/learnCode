@@ -24,7 +24,6 @@ const compileUtil = {
             // 绑定观察者，将来数据发生变化，触发这里回调，进行更新
             value = expr.replace(/\{\{(.*)\}\}/g, (...args) => {
                 new Watcher(vm, args[1], () => {
-                    console.log(this.getContentVal(expr, vm))
                     this.updter.textUpdater(node, this.getContentVal(expr, vm))
                 })
                 return this.getval(args[1], vm)

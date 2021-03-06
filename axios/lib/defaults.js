@@ -81,6 +81,7 @@ var defaults = {
     if (typeof data === 'string') {
       try {
         data = JSON.parse(data);
+        // 如果不能转换成json，那么就不做处理，原样返回
       } catch (e) { /* Ignore */ }
     }
     return data;

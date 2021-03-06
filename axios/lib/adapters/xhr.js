@@ -170,6 +170,7 @@ module.exports = function xhrAdapter(config) {
     if (config.cancelToken) {
       // 指定用于中断请求的回调函数
       config.cancelToken.promise.then(function onCanceled(cancel) {
+        // 请求成功的时候没有request对象，所以只要请求成功了就说明不需要取消了，可以直接返回
         if (!request) {
           return;
         }

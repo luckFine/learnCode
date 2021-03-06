@@ -207,8 +207,8 @@ function trim(str) {
  */
 function isStandardBrowserEnv() {
   if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
-                                           navigator.product === 'NativeScript' ||
-                                           navigator.product === 'NS')) {
+    navigator.product === 'NativeScript' ||
+    navigator.product === 'NS')) {
     return false;
   }
   return (
@@ -235,21 +235,24 @@ function forEach(obj, fn) {
     return;
   }
 
-  // Force an array if not already something iterable
+  // 如果不是一个对象先将其转为数组
   if (typeof obj !== 'object') {
     /*eslint no-param-reassign:0*/
     obj = [obj];
   }
 
   if (isArray(obj)) {
-    // Iterate over array values
+    // 迭代数组
     for (var i = 0, l = obj.length; i < l; i++) {
+      // 让数组中的每一项都去调用fn，参数依次是当前元素，当前元素的下标，要迭代的数组
       fn.call(null, obj[i], i, obj);
     }
   } else {
-    // Iterate over object keys
+    // 迭代对象
     for (var key in obj) {
+      // 迭代自身属性
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        // 让对象中的属性都去调用fn，参数依次是当前对象属性值，对象的属性，要迭代的对象
         fn.call(null, obj[key], key, obj);
       }
     }
@@ -273,15 +276,34 @@ function forEach(obj, fn) {
  * @param {Object} obj1 Object to merge
  * @returns {Object} Result of all merge properties
  */
+// 期待传入的每个参数都是对象，然后将这个对象的属性合并成一个新的对象
+// 如果存在相同的属性，那么取后传入的对象属性值
+// function merge(/* obj1, obj2, obj3, ... */) {
+//   var result = {};
+//   function assignValue(val, key) {
+//     if (isPlainObject(result[key]) && isPlainObject(val)) {
+//       result[key] = merge(result[key], val);
+//     } else if (isPlainObject(val)) {
+//       result[key] = merge({}, val);
+//     } else if (isArray(val)) {
+//       result[key] = val.slice();
+//     } else {
+//       result[key] = val;
+//     }
+//   }
+
+//   for (var i = 0, l = arguments.length; i < l; i++) {
+//     forEach(arguments[i], assignValue);
+//   }
+//   return result;
+// }
+
+
 function merge(/* obj1, obj2, obj3, ... */) {
   var result = {};
   function assignValue(val, key) {
-    if (isPlainObject(result[key]) && isPlainObject(val)) {
+    if (typeof result[key] === 'object' && typeof val === 'object') {
       result[key] = merge(result[key], val);
-    } else if (isPlainObject(val)) {
-      result[key] = merge({}, val);
-    } else if (isArray(val)) {
-      result[key] = val.slice();
     } else {
       result[key] = val;
     }

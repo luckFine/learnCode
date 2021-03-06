@@ -22,12 +22,13 @@ function throwIfCancellationRequested(config) {
  */
 // dispatchRequest 主要负责转换数据 ===》 调用xhrAdapter ===》请求返回后转换响应数据，返回promise
 module.exports = function dispatchRequest(config) {
+  // 如果配置了取消请求
   throwIfCancellationRequested(config);
 
-  // Ensure headers exist
+  // 确保headers存在
   config.headers = config.headers || {};
 
-  // Transform request data
+  // 转换请求体
   config.data = transformData(
     config.data,
     config.headers,

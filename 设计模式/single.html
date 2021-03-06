@@ -1,57 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>单例模式</title>
 </head>
+
 <body>
     <script>
-// 标准单例
-// var Singleton = function (name) { 
-//     this.name = name
-//     this.instance = null
-// }
-// Singleton.prototype.getName = function () {  
-//     alert(this.name)
-// }
-// Singleton.getInstance = function (name){
-//     if(!this.instance){
-//         this.instance = new Singleton(name)
-//     }
-//     return this.instance
-// }
-// var a = Singleton.getInstance('luck1')
-// var b = Singleton.getInstance('luck2')
-// console.log(a)
-// console.log(b)
-// console.log(a === b)
+        // 标准单例
+        // var Singleton = function (name) { 
+        //     this.name = name
+        //     this.instance = null
+        // }
+        // Singleton.prototype.getName = function () {  
+        //     alert(this.name)
+        // }
+        // Singleton.getInstance = function (name){
+        //     if(!this.instance){
+        //         this.instance = new Singleton(name)
+        //     }
+        //     return this.instance
+        // }
+        // var a = Singleton.getInstance('luck1')
+        // var b = Singleton.getInstance('luck2')
+        // console.log(a)
+        // console.log(b)
+        // console.log(a === b)
 
 
-// 简单单例
-// var CreateDiv = (function(){
-//     let instance = null
-//     const  CreateDiv = function(html){
-//         if(instance){
-//             return instance
-//         }
-//         this.html = html
-//         this.init()
-//         return instance = this
-//     }
-//     CreateDiv.prototype.init = function(){
-//         const div = document.createElement('div')
-//         div.innerHTML = this.html
-//         document.body.appendChild(div)
-//     }
-//     return CreateDiv
-// })()
+        // 简单单例
+        // var CreateDiv = (function(){
+        //     let instance = null
+        //     const  CreateDiv = function(html){
+        //         if(instance){
+        //             return instance
+        //         }
+        //         this.html = html
+        //         this.init()
+        //         return instance = this
+        //     }
+        //     CreateDiv.prototype.init = function(){
+        //         const div = document.createElement('div')
+        //         div.innerHTML = this.html
+        //         document.body.appendChild(div)
+        //     }
+        //     return CreateDiv
+        // })()
 
-// let a = new CreateDiv('luck1')
-// let b = new CreateDiv('luck2')
-// console.log(a)
-// console.log(b)
-// console.log(a === b)
+
+
+        // let a = new CreateDiv('luck1')
+        // let b = new CreateDiv('luck2')
+        // console.log(a)
+        // console.log(b)
+        // console.log(a === b)
+
+
+        //通用的单例
+        var getSingle = function (fn) {
+            var result
+            return function () {
+                return result || (result = fn.apply(this, arguments))
+            }
+        }
+        var createLoginLayer = function () {
+            var div = document.createElement('div')
+            div.innerHTML = '我是登录弹窗'
+            div.style.display = 'block'
+            document.body.appendChild(div)
+            return div
+        }
+        var createSingleLogin = getSingle(createLoginLayer)
+        document.getElementById('loginBtn').onclick = function () {
+            var loginLayer = createSingleLogin()
+            loginLayer.style.display = 'block'
+            console.log(loginLayer, loginLayer.style.display)
+        }
+
+    // class jQuery{
+    //     constructor(selector){
+    //         let slice = Array.prototype.slice
+    //         let dom = slice.call(document.querySelectorAll(selector))
+    //         let len = dom ? dom.length : 0
+    //         for(let i = 0 ; i < len; i++){
+    //             this[i] = dom[i]
+    //         }
+    //         this.length = len
+    //         this.selector = selector || ''
+    //     }
+    //     append(node){
+
+    //     }
+    //     addClass(name){
+
+    //     }
+    //     html(data){
+
+    //     }
+    // }
     </script>
 </body>
+
 </html>

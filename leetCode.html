@@ -1,63 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-    // var reverse = function (x) {
-    //     const max = 2 ** 31
-    //     const MIN = -max
-    //     const MAX = max - 1
-    //     let result
-    //     let arr = (x + '').split('').reverse()
-    //     if (arr[0] === '0') {
-    //         arr.shift()
-    //     }
-    //     if (x < 0) {
-    //         arr.pop()
-    //         arr.unshift('-')
-    //     }
-    //     result = arr.join('')
-    //     return (result > MAX || result < MIN) ? 0 : result
-    // };
-    // console.log(''+ -123)
-    // console.log(reverse(-123))
-    // function Person() { }
-    // Person.prototype = {
-    //     name: 'tt',
-    //     age: 18
-    // }
-    // // 实例化之前先修改Person的constructor指向
-    // Person.prototype.constructor = Person
-    // var person1 = new Person();
-    // console.log(person1.name)
+        // var reverse = function (x) {
+        //     const max = 2 ** 31
+        //     const MIN = -max
+        //     const MAX = max - 1
+        //     let result
+        //     let arr = (x + '').split('').reverse()
+        //     if (arr[0] === '0') {
+        //         arr.shift()
+        //     }
+        //     if (x < 0) {
+        //         arr.pop()
+        //         arr.unshift('-')
+        //     }
+        //     result = arr.join('')
+        //     return (result > MAX || result < MIN) ? 0 : result
+        // };
+        // console.log(''+ -123)
+        // console.log(reverse(-123))
+        // function Person() { }
+        // Person.prototype = {
+        //     name: 'tt',
+        //     age: 18
+        // }
+        // // 实例化之前先修改Person的constructor指向
+        // Person.prototype.constructor = Person
+        // var person1 = new Person();
+        // console.log(person1.name)
 
 
-   
-    function bar() {
-        var myName = "极客世界"
-        let test1 = 100
-        if (1) {
-            let myName = "Chrome浏览器"
-            console.log(test)
+
+        // function bar() {
+        //     var myName = "极客世界"
+        //     let test1 = 100
+        //     if (1) {
+        //         let myName = "Chrome浏览器"
+        //         console.log(test)
+        //     }
+        // }
+        // function foo() {
+        //     var myName = "极客邦"
+        //     let test = 2
+        //     {
+        //         let test = 3
+        //         bar()
+        //     }
+        // }
+        // var myName = "极客时间"
+        // let myAge = 10
+        // let test = 1
+        // foo() 
+
+        // for (let i = 0; i < 3; i++) {
+
+        //     const i = 5;
+        //     document.addEventListener('click', function () {
+
+        //         console.log(i);
+
+        //     })
+
+        // }
+        // Function.prоtоtype.a = () => alert(1);
+        //     Function.prоtоtype['a'] = function () {
+        //         alert(1);
+        //     }
+        //     // Object.prоtоtype.b = () => alert(2);
+        //     Object.prоtоtype.b = function () {
+        //         alert(2)
+        //     }
+
+        //     function A() { };
+
+        //     const a = new A();
+
+        //     a.a();
+
+        //     a.b();
+
+        //     console.log(a instanceof Function)
+        //     console.log(a instanceof Object)
+        //     console.log(A instanceof Function)
+        //     console.log(A instanceof Object)
+
+
+        // console.log(a);
+
+        // var a = function () { };
+
+
+
+        // console.lоg(b);
+
+        // let b = function () { };
+
+
+
+        // console.lоg(c);
+
+        // function c() { }
+
+        // 参数fn：被柯里化的函数
+        function curry(fn) {
+            // 记录fn的参数个数
+            let len = fn.length
+            return function temp() {
+                let args = [...arguments]
+                if (args.length >= len) {
+                    return fn(...args)
+                } else {
+                    return function () {
+                        return temp(...args, ...arguments)
+                    }
+                }
+
+            }
         }
-    }
-    function foo() {
-        var myName = "极客邦"
-        let test = 2
-        {
-            let test = 3
-            bar()
+        function hh(a, b, c) {
+            return a + b + c
         }
-    }
-    var myName = "极客时间"
-    let myAge = 10
-    let test = 1
-    foo() 
+        // 保存函数引用
+        let r = curry(hh)
+        console.log(r(1)(2))
     </script>
 </body>
+
 </html>
