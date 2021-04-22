@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        new Promise((resolve, reject) => {
-            reject(1)
-        }).then(
-            value => console.log(value)
-        ).catch(
-            reason => {
-                console.log('程序报错就中断promise')
-                return new Promise(() => { }) // 返回一个pending的promise
-            })
-        .then(
-            value => console.log('如果程序报错，将不会执行到这')
-        )
-    </script> 
+        // new Promise((resolve, reject) => {
+        //     reject(1)
+        // }).then(
+        //     value => console.log(value)
+        // ).catch(
+        //     reason => {
+        //         console.log('程序报错就中断promise')
+        //         return new Promise(() => { }) // 返回一个pending的promise
+        //     })
+        // .then(
+        //     value => console.log('如果程序报错，将不会执行到这')
+        // )
+
+        function webCanteenGenerator(list) {
+            var index = 0;
+            var len = list.length;
+            return {
+                // 定义 next 方法
+                // 记录每次遍历位置，实现闭包，借助自由变量做迭代过程中的“游标”
+                next: function () {
+                    var done = index >= len; // 如果索引还没有超出集合长度，done 为 false
+                    var value = !done ? list[index++] : undefined; // 如果 done 为 false，则可以继续取值
+                    // 返回遍历是否完毕的状态和当前值
+                    return {
+                        done: done,
+                        value: value
+                    }
+                }
+            }
+        }
+        // 自动执行器
+        function run(gen) {
+            var g = gen();
+            function next(data) {
+                var result = g.next(data);
+                if (result.done) return result.value;
+                result.value.then(function (data) {
+                    next(data);
+                });
+            }
+            next();
+        }
+    </script>
 </body>
+
 </html>
