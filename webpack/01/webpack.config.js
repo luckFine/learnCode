@@ -10,6 +10,6 @@ module.exports = {
         path: path.resolve('dist')
     },
     plugins: [
-        new HtmlWebpackPlugin('./src/index.html')
+        new HtmlWebpackPlugin('./src/index.html'),
     ]
 }

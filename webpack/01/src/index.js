@@ -1,10 +1,10 @@
+var button = document.createElement('button');
+button.innerHTML = '点击按需加载';
 
-let btn = document.getElementById('btn');
-
-btn.addEventListener('click', function () {
-    import(/* webpackChunkName: "login" */'./login').then((login) => {
+button.addEventListener('click', function () {
+    import(/* webpackChunkName: "print" */'./print.js').then((login) => {
         console.log(login)
     })
 })
 
-console.log('index.js 内容执行了');
+document.body.appendChild(button);
