@@ -3,7 +3,8 @@
 // 有Sync后缀的方法为同步方法，不具有Sync后缀的方法均为异步方法。这两者的区别就是，
 // 同步方法立即返回操作结果，在使用同步方法执行的操作结束执行之前，不能执行后续代码，
 
-// const fs = require('fs');
+
+const fs = require('fs');
 
 // try {
 // 	var data = fs.readFileSync('./index.html','utf-8');
@@ -303,7 +304,7 @@
 //     console.log(buf.slice(0, bytesRead).toString());        
 // })
 
-// 异步写入文件
+// 异步写入文件  大文件写入用buffer
 // var fs = require('fs')
 // var buf = Buffer.from('我叫饭饭');
 // fs.open('./message.txt','w', function(err,fd){
@@ -336,6 +337,14 @@
 //     })  
 // })
 
+
+/** 将缓冲区的内容写入到磁盘文件中
+ * fd 丁文当前被打开的文件
+ * bf 用于表示当前缓冲区
+ * offset 表示当前从buf 的哪个位置开始执行写入
+ * length 表示当前写入的长度
+ * position 表示当前重文件的哪个位置开始读取
+ */
 // var fs = require('fs')
 // var buf = Buffer.from('我叫饭饭');
 // fs.open('./message.txt','w', function(err,fd){
@@ -421,6 +430,58 @@
 // 情况。
 
 
+// 监控文件
+// fs.watchFile('./../food.txt', { interval: 20 }, (curr, prev) => {
+//     if (curr.mtime === prev.mtime) {
+//         console.log('文件被修改了')
+//         fs.unwatchFile('./../foot.txt')
+//     }
+// })
+
+
+/**
+ * 常见目录操作API
+ *
+ * access 判断文件或目录是否具有操作权限
+ * stat 获取目录及文件信息
+ * mkdir 创建目录
+ * rmdir 删除目录
+ * readdir 读取目录中的内容
+ * unlink 删除指定文件
+ */
+
+// fs.access('a.txt', (err) => {
+//     if (err) {
+//         console.log(err)
+//     } else {
+//         console.log('有操作权限')
+//     }
+// })
+
+// fs.stat('a.txt', (err, statObj) => {
+//     console.log(statObj.size)
+//     console.log(statObj.isFile()) // 是否是个文件
+//     console.log(statObj.isDirectory()) // 是否是个目录
+// })
+
+
+// fs.mkdir('a/b/c', (err, statObj) => {
+//     if (!err) {
+//         console.log('创建成功')
+//     } else {
+//         console.log(err)
+//     }
+// })
+
+
+
+fs.rmdir('a', { recursive: true }, (err, statObj) => {
+    if (!err) {
+        console.log('删除成功')
+    } else {
+        console.log(err)
+    }
+})
 
 
 

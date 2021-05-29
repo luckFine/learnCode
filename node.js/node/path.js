@@ -21,6 +21,8 @@ const path = require('path');
 
 // path.format() ：方法从对象返回路径字符串
 
+// path.parse('./a/b/c/index.html')
+
 
 
 

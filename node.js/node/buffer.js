@@ -14,7 +14,7 @@
 // <Buffer 00 00 00 00 00 00 00 00 00 00>
 
 // // 创建一个长度为 10、且用 01 填充的 Buffer。 
-const buf2 = Buffer.alloc(10, 1);
+// const buf2 = Buffer.alloc(10, 1);
 // <Buffer 01 01 01 01 01 01 01 01 01 01>
 
 
@@ -22,16 +22,16 @@ const buf2 = Buffer.alloc(10, 1);
 // // 这个方法比调用 Buffer.alloc() 更快，
 // // 但返回的 Buffer 实例可能包含旧数据，
 // // 因此需要使用 fill() 或 write() 重写。
-const buf3 = Buffer.allocUnsafe(10);
- //<Buffer d0 dd bf ef fe 7f 00 00 00 00>
+// const buf3 = Buffer.allocUnsafe(10);
+//<Buffer d0 dd bf ef fe 7f 00 00 00 00>
 
 // // 创建一个包含 [0x1, 0x2, 0x3] 的 Buffer。
-const buf4 = Buffer.from([1, 2, 3]); //<Buffer 01 02 03>
+// const buf4 = Buffer.from([1, 2, 3]); //<Buffer 01 02 03>
 
 
 // // 创建一个包含 UTF-8 字节 [0x74, 0xc3, 0xa9, 0x73, 0x74] 的 Buffer。
-const buf5 = Buffer.from('tést'); //<Buffer 74 c3 a9 73 74>
-console.log(buf5);
+// const buf5 = Buffer.from('tést'); //<Buffer 74 c3 a9 73 74>
+// console.log(buf5);
 
 // // 创建一个包含 Latin-1 字节 [0x74, 0xe9, 0x73, 0x74] 的 Buffer。
 // const buf6 = Buffer.from('tést', 'latin1');
@@ -79,6 +79,33 @@ console.log(buf5);
 // buf.toString('UTF-8', 0, 8)
 // console.log(buf.toString('UTF-8', 0, 5)); //luckf
 // start和end是转换时候的起始位置，之前通过写入不同编码的那种方式写入到buffer对象里的二进制元素，就可以通过这个方式重新读出了，不过，还是不要这样使用为好。
+
+
+// slice
+// var buf = Buffer.from('你好')
+// let b1 = buf.slice(-3)
+// console.log(b1)
+// console.log(b1.toString())
+
+// indexOf
+// var buf = Buffer.from('你好hah哈哈哈哈')
+// console.log(buf.indexOf('好'))
+
+// copy
+// let b1 = Buffer.alloc(6)
+// let b2 = Buffer.from('拉黑')
+// b2.copy(b1, 3, 3, 6)
+// console.log(b1.toString())
+// console.log(b2.toString())
+
+// concat: 将多个buffer拼接成一个新的buffer
+// isBuffer: 判断当前数据是否为buffer
+
+
+
+
+
+
 
 
 
