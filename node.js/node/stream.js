@@ -4,13 +4,29 @@
 // 所包含的数据转换为各种形式的流数据（字节数据），在通过流的传输
 // 到达目的对象后再将流数据转换为该对象中可以使用的数据。
 
+// 流就是处理流式数据的抽象接口
+// 事件效率：流的分段处理可以同时操作多个数据chunk
+// 空间效率：同一时间流无需占据大内存空间
+// 使用方便：流配合管理，扩展程序变得简单
 
 // Node.js 中有四种基本的流类型：
 // Writable - 可写入数据的流。
 // Readable - 可读取数据的流。
 // Duplex - 可读又可写的流。
-// Transform - 在读写过程中可以修改或转换数据的 Duplex 流。
+// Transform - 转换流，可读可写，还能实现数据转换 在读写过程中可以修改或转换数据的 Duplex 流。
 
+// Stream模块实现了四个具体的抽象
+// 所有流都继承自EventEmitter
+
+
+// 管道
+// 管道pipe提供了一个输出流到输入流的机制，通常我们用于从一个流中回去数据并将数据传递到另外一个流中
+// 可用来实现大文件复制
+// var fs = require('fs')
+// var s1 = fs.createReadStream('./../food.txt');
+// var s2 = fs.createWriteStream('./../food2.txt');
+// // 可用来实现大文件复制
+// s1.pipe(s2)
 
 
 // 流的读取
@@ -100,15 +116,6 @@
 // })
 
 
-// 管道
-// 管道pipe提供了一个输出流到输入流的机制，通常我们用于从一个流中回去数据并将数据传递到另外一个流中
-// 可用来实现大文件复制
-// var fs = require('fs')
-// var s1 = fs.createReadStream('./../food.txt');
-// var s2 = fs.createWriteStream('./../food2.txt');
-// // 可用来实现大文件复制
-// s1.pipe(s2)
-
 // 链式流
 // 链式流是通过连接输出流到另一个流并创建多个对各流操作链的机制，链式流一般用于管道操作
 
@@ -120,7 +127,7 @@ var zlib = require('zlib')
 fs.createReadStream('./../food.txt')
 	.pipe(zlib.createGzip())
 	.pipe(fs.createWriteStream('./../foot.txt.gz'))
-console.log("文件压缩完成");	
+console.log("文件压缩完成");
 
 
 

@@ -392,6 +392,8 @@ const fs = require('fs');
 //         fs.rmdirSync(path);
 //     }
 // };
+
+
 // var fs = require('fs')
 // function deldir(path) {
 // 	// 是否存在这样的路径
